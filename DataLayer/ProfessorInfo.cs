@@ -1,7 +1,10 @@
 ﻿namespace DataLayer
 {
-    public class Class1
+    public class ProfessorInfo
     {
+        public string profname;
+        public string subject;
+        
 
     }
 }

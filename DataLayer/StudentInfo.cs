@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    internal class Class1
+    public class StudentInfo
     {
+        public string studentname; 
+        public string section;
+        public string course;
+       
+      
     }
 }
