@@ -4,7 +4,7 @@ using System.ComponentModel;
 using DataLayer;
 
 
-
+//Lord, help me get through this hurdle
 public class MainSystem 
 {
     static List<string> menuoptions = new List<string>()
