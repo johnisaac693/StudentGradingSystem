@@ -5,6 +5,7 @@ using DataLayer;
 
 
 //Lord, help me get through this hurdle
+//Grape, I screwed up bigtimeeeeeeeee
 public class MainSystem 
 {
     static List<string> menuoptions = new List<string>()
