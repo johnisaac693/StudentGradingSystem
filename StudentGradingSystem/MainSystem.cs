@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using DataLayer;
 
-<<<<<<< Updated upstream
 
-//Lord, help me get through this hurdle
-//Grape, I screwed up bigtimeeeeeeeee
-public class MainSystem 
-=======
+
+
+
 //How on earth am I able to apply this to a GUI?
 //Just prepping the classes and the objects is killing me
 public class MainSystem
->>>>>>> Stashed changes
+
 {
     static List<string> menuoptions = new()
      {"Enter Student Info - Press 1", "View Students and Info - Press 2", "Input Grades - Press 3", "Exit - 0"};
