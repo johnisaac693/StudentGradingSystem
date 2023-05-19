@@ -2,8 +2,8 @@
 {
     public class ProfessorInfo
     {
-        public string profname;
-        public string subject;
+        //public string profname;
+        //public string subject;
         
 
     }

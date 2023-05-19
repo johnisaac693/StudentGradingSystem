@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using DataLayer;
-
+using GUI;
 
 public class MainSystem
 
 {
-    static List<string> menuoptions = new()
-     {"Enter Student Info - Press 1", "View Students and Info - Press 2", "Input Grades - Press 3", "Exit - 0"};
+    
 
    
     static void Main(string[] args)
@@ -19,8 +18,8 @@ public class MainSystem
             
             Console.WriteLine("Welcome to the Grading System");
             Console.WriteLine("Here are your options: ");
-            ViewMenu();
-            int selectmenu = ViewMenuSelect();
+            UserInterfaces.ViewMenu();
+            int selectmenu = UserInterfaces.ViewMenuSelect();
 
             while (selectmenu != 0)
             {
@@ -30,27 +29,27 @@ public class MainSystem
                         
 
                         Console.WriteLine("");// Linebreak for when the menu activates
-                        CreateStudent();
+                        StudentInfoMethods.CreateStudent();
 
-                        ViewMenu();
-                        selectmenu = ViewMenuSelect();
+                        UserInterfaces.ViewMenu();
+                        selectmenu = UserInterfaces.ViewMenuSelect();
                         break;
 
                     case 2:
                         Console.WriteLine("");
                         Console.WriteLine("Viewing Student/s:");
-                        StudentInfo.GetStudentInfo();
+                        StudentInfoMethods.GetStudentInfo();
                         Console.WriteLine("");
-                        ViewMenu();
-                        selectmenu = ViewMenuSelect();
+                        UserInterfaces.ViewMenu();
+                        selectmenu = UserInterfaces.ViewMenuSelect();
                         break;
 
                     case 3:
                         Console.WriteLine("");
                         Console.WriteLine("Input grades sample");
                         Console.WriteLine("");
-                        ViewMenu();
-                        selectmenu = ViewMenuSelect();
+                        UserInterfaces.ViewMenu();
+                        selectmenu = UserInterfaces.ViewMenuSelect();
                         break;
 
                    
@@ -87,71 +86,11 @@ public class MainSystem
         }
     }
 
-    static void ViewMenu() // view menu
-    {
-        foreach (var option in menuoptions) 
-        {
-            Console.WriteLine(option);
-        }
-       
-        
-    }
+    
 
-    private static void ProfessorGradingInterface()
-    {
-        ViewMenu();
-    }
+   
 
-    static int ViewMenuSelect()
-    {
-        try
-        {
-            Console.WriteLine("Select your action");
-            int choice = Convert.ToInt32(Console.ReadLine());
-            return choice;
-        }
-        catch
-        {
-         return 0;
-        }
-        
+   
 
-      
-    }
-
-   static void CreateStudent()
-    {
-        string studname;
-        string section;
-        int grade;
-
-        //strings into uppercase
-
-        string studentnameupper;
-        string sectionupper;
-
-        try
-        {
-            Console.WriteLine("");
-            Console.Write("Enter Name Here: ");
-            studname = Console.ReadLine();
-            Console.Write("Enter Section here: ");
-            section = Console.ReadLine();
-            Console.Write("Enter Grade here: ");
-            grade = Convert.ToInt32(Console.ReadLine());
-
-            studentnameupper = studname.ToUpper();
-            sectionupper = section.ToUpper();
-
-            StudentInfo student = new(studentnameupper, sectionupper, grade);
-            StudentInfo.studentlist.Add(student);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("An Invalid Input was detected, returning to main menu");
-            StudentInfo.studentlist.RemoveAt(StudentInfo.studentlist.Count - 1);
-
-        }
-         
-    }
+   
 }
