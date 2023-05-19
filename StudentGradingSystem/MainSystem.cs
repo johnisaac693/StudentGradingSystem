@@ -17,7 +17,7 @@ public class MainSystem
     static List<string> menuoptions = new()
      {"Enter Student Info - Press 1", "View Students and Info - Press 2", "Input Grades - Press 3", "Exit - 0"};
 
-    public static List<StudentInfo> studentlist = new();
+   
     static void Main(string[] args)
     {
 
@@ -46,13 +46,7 @@ public class MainSystem
                     case 2:
                         Console.WriteLine("");
                         Console.WriteLine("Viewing Student/s:");
-                        foreach (StudentInfo student in studentlist)
-                        {
-                            Console.WriteLine($"Name: {student.studentname}");
-                            Console.WriteLine($"Section: {student.section}");
-                            Console.WriteLine($"Course: {student.grade}");
-                            Console.WriteLine("");
-                        }
+                        StudentInfo.GetStudentInfo();
                         Console.WriteLine("");
                         ViewMenu();
                         selectmenu = ViewMenuSelect();
@@ -157,12 +151,12 @@ public class MainSystem
             sectionupper = section.ToUpper();
 
             StudentInfo student = new(studentnameupper, sectionupper, grade);
-            studentlist.Add(student);
+            StudentInfo.studentlist.Add(student);
         }
         catch (Exception e)
         {
             Console.WriteLine("An Invalid Input was detected, returning to main menu");
-            studentlist.RemoveAt(studentlist.Count - 1);
+            StudentInfo.studentlist.RemoveAt(StudentInfo.studentlist.Count - 1);
 
         }
          
