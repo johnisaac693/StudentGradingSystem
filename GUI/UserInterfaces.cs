@@ -44,8 +44,8 @@ namespace GUI
         public static void SpecialStudentGradeGUI()
         {
 
-            UserInterfaces.ViewGradingOptions();
-            int gradeselectmenu = UserInterfaces.ViewGradingSelect();
+            ViewGradingOptions();
+            int gradeselectmenu = ViewGradingSelect();
 
             while (gradeselectmenu != 0)
             {
@@ -55,51 +55,51 @@ namespace GUI
                         Console.WriteLine("Seatworks");
 
                         Console.WriteLine("");
-                        UserInterfaces.ViewGradingOptions();
-                        gradeselectmenu = UserInterfaces.ViewGradingSelect();
+                        ViewGradingOptions();
+                        gradeselectmenu = ViewGradingSelect();
 
                         break;
                     case 2:
                         Console.WriteLine("Quizzes");
 
                         Console.WriteLine("");
-                        UserInterfaces.ViewGradingOptions();
-                        gradeselectmenu = UserInterfaces.ViewGradingSelect();
+                        ViewGradingOptions();
+                        gradeselectmenu = ViewGradingSelect();
                         break;
                     case 3:
                         Console.WriteLine("Recitations");
 
                         Console.WriteLine("");
-                        UserInterfaces.ViewGradingOptions();
-                        gradeselectmenu = UserInterfaces.ViewGradingSelect();
+                        ViewGradingOptions();
+                        gradeselectmenu = ViewGradingSelect();
                         break;
                     case 4:
                         Console.WriteLine("Performance Tasks");
 
                         Console.WriteLine("");
-                        UserInterfaces.ViewGradingOptions();
-                        gradeselectmenu = UserInterfaces.ViewGradingSelect();
+                        ViewGradingOptions();
+                        gradeselectmenu = ViewGradingSelect();
                         break;
                     case 5:
                         Console.WriteLine("Midterms");
 
                         Console.WriteLine("");
-                        UserInterfaces.ViewGradingOptions();
-                        gradeselectmenu = UserInterfaces.ViewGradingSelect();
+                        ViewGradingOptions();
+                        gradeselectmenu = ViewGradingSelect();
                         break;
                     case 6:
                         Console.WriteLine("Finals");
 
                         Console.WriteLine("");
-                        UserInterfaces.ViewGradingOptions();
-                        gradeselectmenu = UserInterfaces.ViewGradingSelect();
+                        ViewGradingOptions();
+                        gradeselectmenu = ViewGradingSelect();
                         break;
                     case 7:
                         Console.WriteLine("Optional Toggles");
-                        UserInterfaces.ViewGradingOptions();
+                        ViewGradingOptions();
 
                         Console.WriteLine("");
-                        gradeselectmenu = UserInterfaces.ViewGradingSelect();
+                        gradeselectmenu = ViewGradingSelect();
                         break;
 
                     default:
