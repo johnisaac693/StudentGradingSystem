@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Metrics;
+using System.Diagnostics;
 using DataLayer;
 using GUI;
 
@@ -31,8 +33,13 @@ public class MainSystem
 
                         Console.WriteLine("");// Linebreak for when the menu activates
                         StudentInfoMethods.CreateStudent();
-
                         UserInterfaces.ViewMenu();
+
+                        //Enter Student Info - Press 1  
+                        //View Students and Info -Press 2  
+                        //Input Grades - Press 3 
+                        //Exit - 0
+
                         selectmenu = UserInterfaces.ViewMenuSelect();
                         break;
 
@@ -47,7 +54,64 @@ public class MainSystem
 
                     case 3:
                         Console.WriteLine("");
-                        Console.WriteLine("Input grades sample");
+                        Console.WriteLine("Input grades");
+                        UserInterfaces.ViewGradingOptions();
+                        int gradeselectmenu = UserInterfaces.ViewGradingSelect();
+
+                        while (gradeselectmenu != 0)
+                        {
+                            switch (gradeselectmenu)
+                            {
+                                case 1:
+                                    Console.WriteLine("Seatworks");
+                                    UserInterfaces.ViewGradingOptions();
+                                    gradeselectmenu = UserInterfaces.ViewGradingSelect();
+
+                                    break;
+                                case 2:
+                                    Console.WriteLine("Quizzes");
+                                    UserInterfaces.ViewGradingOptions();
+                                    gradeselectmenu = UserInterfaces.ViewGradingSelect();
+                                    break;
+                                case 3:
+                                    Console.WriteLine("Recitations");
+
+                                    UserInterfaces.ViewGradingOptions();
+                                    gradeselectmenu = UserInterfaces.ViewGradingSelect();
+                                    break;
+                                case 4:
+                                    Console.WriteLine("Performance Tasks");
+
+                                    UserInterfaces.ViewGradingOptions();
+                                    gradeselectmenu = UserInterfaces.ViewGradingSelect();
+                                    break;
+                                case 5:
+                                    Console.WriteLine("Midterms");
+
+                                    UserInterfaces.ViewGradingOptions();
+                                    gradeselectmenu = UserInterfaces.ViewGradingSelect();
+                                    break;
+                                case 6:
+                                    Console.WriteLine("Finals");
+
+                                    UserInterfaces.ViewGradingOptions();
+                                    gradeselectmenu = UserInterfaces.ViewGradingSelect();
+                                    break;
+                                case 7:
+                                    Console.WriteLine("Optional Toggles");
+
+                                    UserInterfaces.ViewGradingOptions();
+                                    gradeselectmenu = UserInterfaces.ViewGradingSelect();
+                                    break;
+                                
+                                default:
+                                    gradeselectmenu = 0;
+                                    break;
+                            }
+                        }
+
+
+
                         Console.WriteLine("");
                         UserInterfaces.ViewMenu();
                         selectmenu = UserInterfaces.ViewMenuSelect();
