@@ -64,43 +64,52 @@ public class MainSystem
                             {
                                 case 1:
                                     Console.WriteLine("Seatworks");
+
+                                    Console.WriteLine("");
                                     UserInterfaces.ViewGradingOptions();
                                     gradeselectmenu = UserInterfaces.ViewGradingSelect();
 
                                     break;
                                 case 2:
                                     Console.WriteLine("Quizzes");
+
+                                    Console.WriteLine("");
                                     UserInterfaces.ViewGradingOptions();
                                     gradeselectmenu = UserInterfaces.ViewGradingSelect();
                                     break;
                                 case 3:
                                     Console.WriteLine("Recitations");
 
+                                    Console.WriteLine("");
                                     UserInterfaces.ViewGradingOptions();
                                     gradeselectmenu = UserInterfaces.ViewGradingSelect();
                                     break;
                                 case 4:
                                     Console.WriteLine("Performance Tasks");
 
+                                    Console.WriteLine("");
                                     UserInterfaces.ViewGradingOptions();
                                     gradeselectmenu = UserInterfaces.ViewGradingSelect();
                                     break;
                                 case 5:
                                     Console.WriteLine("Midterms");
 
+                                    Console.WriteLine("");
                                     UserInterfaces.ViewGradingOptions();
                                     gradeselectmenu = UserInterfaces.ViewGradingSelect();
                                     break;
                                 case 6:
                                     Console.WriteLine("Finals");
 
+                                    Console.WriteLine("");
                                     UserInterfaces.ViewGradingOptions();
                                     gradeselectmenu = UserInterfaces.ViewGradingSelect();
                                     break;
                                 case 7:
                                     Console.WriteLine("Optional Toggles");
-
                                     UserInterfaces.ViewGradingOptions();
+
+                                    Console.WriteLine("");
                                     gradeselectmenu = UserInterfaces.ViewGradingSelect();
                                     break;
                                 
