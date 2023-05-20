@@ -16,7 +16,7 @@ public class MainSystem
     static void Main(string[] args)
     {
 
-        if (FacultyCheck() == true)
+        if (ProfessorInfo.FacultyCheck() == true)
         {
             
             Console.WriteLine("Welcome to the Grading System");
@@ -78,23 +78,7 @@ public class MainSystem
         }
     }
 
-    static bool FacultyCheck()
-    {
-        string profcheck;
-        Console.WriteLine("Are you a Professor, or Student?");
-        profcheck = Console.ReadLine();
-       string profupper = profcheck.ToUpper();
-
-        if (profupper == "PROFESSOR")
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
+   
     
 
    
