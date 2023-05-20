@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Metrics;
+using System.Diagnostics;
 using DataLayer;
 using GUI;
 
@@ -14,7 +16,7 @@ public class MainSystem
     static void Main(string[] args)
     {
 
-        if (FacultyCheck() == true)
+        if (ProfessorInfo.FacultyCheck() == true)
         {
             
             Console.WriteLine("Welcome to the Grading System");
@@ -31,8 +33,13 @@ public class MainSystem
 
                         Console.WriteLine("");// Linebreak for when the menu activates
                         StudentInfoMethods.CreateStudent();
-
                         UserInterfaces.ViewMenu();
+
+                        //Enter Student Info - Press 1  
+                        //View Students and Info -Press 2  
+                        //Input Grades - Press 3 
+                        //Exit - 0
+
                         selectmenu = UserInterfaces.ViewMenuSelect();
                         break;
 
@@ -47,7 +54,8 @@ public class MainSystem
 
                     case 3:
                         Console.WriteLine("");
-                        Console.WriteLine("Input grades sample");
+                        Console.WriteLine("Input grades");
+                        UserInterfaces.SpecialStudentGradeGUI();
                         Console.WriteLine("");
                         UserInterfaces.ViewMenu();
                         selectmenu = UserInterfaces.ViewMenuSelect();
@@ -70,23 +78,7 @@ public class MainSystem
         }
     }
 
-    static bool FacultyCheck()
-    {
-        string profcheck;
-        Console.WriteLine("Are you a Professor, or Student?");
-        profcheck = Console.ReadLine();
-       string profupper = profcheck.ToUpper();
-
-        if (profupper == "PROFESSOR")
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
+   
     
 
    
