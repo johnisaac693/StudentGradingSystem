@@ -96,6 +96,9 @@ namespace GUI
                         break;
                     case 7:
                         Console.WriteLine("Optional Toggles");
+                        ViewToggles();
+                        Console.WriteLine("");
+
                         ViewGradingOptions();
 
                         Console.WriteLine("");
@@ -117,13 +120,14 @@ namespace GUI
             
                 try
                 {
-                    Console.WriteLine("Select your action");
-                    int choice = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Select your action: ");
+                int choice = Convert.ToInt32(Console.ReadLine());
                     return choice;
                 }
                 catch
                 {
-                    return 0;
+                Console.WriteLine("Invalid input detected. Returning to Main Menu");
+                return 0;
                 }
 
         }
@@ -131,12 +135,13 @@ namespace GUI
         {
             try
             {
-                Console.WriteLine("Select your action");
+                Console.Write("Select your action: ");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 return choice;
             }
             catch
             {
+                Console.WriteLine("Invalid input detected. Terminating program");
                 return 0;
             }
 
@@ -148,7 +153,7 @@ namespace GUI
         {
             try
             {
-                Console.WriteLine("Select your action");
+                Console.Write("Select your action: ");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 return choice;
             }
@@ -159,7 +164,7 @@ namespace GUI
 
 
 
-        }
+        }//TBA later
 
        
 

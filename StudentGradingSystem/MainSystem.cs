@@ -55,7 +55,7 @@ public class MainSystem
                     case 3:
                         Console.WriteLine("");
                         Console.WriteLine("Input grades");
-                       UserInterfaces.SpecialStudentGradeGUI();
+                        UserInterfaces.SpecialStudentGradeGUI();
                         Console.WriteLine("");
                         UserInterfaces.ViewMenu();
                         selectmenu = UserInterfaces.ViewMenuSelect();
