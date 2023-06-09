@@ -4,6 +4,6 @@ namespace BusinessLayer
 {
     public class Formulas
     {
-
+    
     }
 }
