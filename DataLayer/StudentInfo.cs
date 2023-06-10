@@ -11,15 +11,19 @@ namespace DataLayer
         public static List<StudentInfo> studentlist = new();
         public string Studentname { get; set; }
         public string Section { get; set; }
-        public int Grade { get; set; }
+        //public int Grade { get; set; }
+
+        public int SeatworkGrade { get; set; }
 
         //Constructor
-        public StudentInfo(string studentname, string section, int grade)
+        public StudentInfo(string studentname, string section)
         {
             this.Studentname = studentname ?? throw new ArgumentNullException(nameof(studentname));
             this.Section = section ?? throw new ArgumentNullException(nameof(section));
-            this.Grade = grade;
+            //this.Grade = grade;
         }
+
+       
     }
 
     public class StudentInfoMethods
@@ -28,7 +32,7 @@ namespace DataLayer
         {
             string studname;
             string section;
-            int grade;
+           
 
             //strings into uppercase
 
@@ -43,12 +47,12 @@ namespace DataLayer
                 Console.Write("Enter Section here: ");
                 section = Console.ReadLine();
                 Console.Write("Enter Grade here: ");
-                grade = Convert.ToInt32(Console.ReadLine());
+               
 
                 studentnameupper = studname.ToUpper();
                 sectionupper = section.ToUpper();
 
-                StudentInfo student = new(studentnameupper, sectionupper, grade);
+                StudentInfo student = new(studentnameupper, sectionupper);
                 StudentInfo.studentlist.Add(student);
             }
             catch (Exception e)
@@ -66,7 +70,6 @@ namespace DataLayer
             {
                 Console.WriteLine($"Name: {student.Studentname}");
                 Console.WriteLine($"Section: {student.Section}");
-                Console.WriteLine($"Grade: {student.Grade}");
                 Console.WriteLine("");
             }
         }
