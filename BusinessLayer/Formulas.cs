@@ -23,7 +23,7 @@ namespace BusinessLayer
                     if (score > Constantitems)
                     {
                         Console.WriteLine("Score cannot be higher than item limit. Returning to Main Menu");
-                        StudentInfo.studentlist.RemoveAt(studentlist.Count - 1);
+                        StudentInfo.studentlist.RemoveAt(StudentInfo.studentlist.Count - 1);
                         return;
                     }
 
@@ -31,8 +31,8 @@ namespace BusinessLayer
 
                 double itemall = Constantitems * x;
                 double grade = (sum / itemall) * 100;
-                Console.WriteLine($"Your grade is {grade}");
-                Grades.Add(grade);
+                //Console.WriteLine($"Your grade is {grade}");
+                //Grades.Add(grade);
             }
             catch
             {
@@ -66,7 +66,7 @@ namespace BusinessLayer
                     if (score > Dynamicitems)
                     {
                         Console.WriteLine("Score cannot be higher than constant item. Returning to Main Menu");
-                        StudentInfo.studentlist.RemoveAt(studentlist.Count - 1);
+                        StudentInfo.studentlist.RemoveAt(StudentInfo.studentlist.Count - 1);
                         return;
                     }
                 }
@@ -75,8 +75,8 @@ namespace BusinessLayer
 
 
                 double grade = (sum / scoresum) * 100;
-                Console.WriteLine($"Your grade is {grade}");
-                Grades.Add(grade);
+                //Console.WriteLine($"Your grade is {grade}");
+                //Grades.Add(grade);
             }
             catch
             {
