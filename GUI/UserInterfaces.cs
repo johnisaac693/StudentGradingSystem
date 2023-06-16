@@ -55,7 +55,7 @@ namespace GUI
                 {
                     case 1:
                         Console.WriteLine("Seatworks");
-
+                        SeatworkCheck.DynamicOrStatic();
                         Console.WriteLine("");
                         ViewGradingOptions();
                         gradeselectmenu = ViewGradingSelect();
