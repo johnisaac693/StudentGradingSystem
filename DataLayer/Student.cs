@@ -6,29 +6,35 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    public class StudentInfo
+    public class Student
     {
-        public static List<StudentInfo> studentlist = new();
+      
         public string Studentname { get; set; }
         public string Section { get; set; }
-        public int Grade { get; set; }
+        //public int Grade { get; set; }
+
+        public double SeatworkGrade { get; set; }
 
         //Constructor
-        public StudentInfo(string studentname, string section, int grade)
+        public Student(string studentname, string section)
         {
             this.Studentname = studentname ?? throw new ArgumentNullException(nameof(studentname));
             this.Section = section ?? throw new ArgumentNullException(nameof(section));
-            this.Grade = grade;
+            //this.Grade = grade;
         }
+
+       
     }
 
     public class StudentInfoMethods
     {
+
+        public static List<Student> studentlist = new();
         public static void CreateStudent()
         {
             string studname;
             string section;
-            int grade;
+           
 
             //strings into uppercase
 
@@ -42,19 +48,21 @@ namespace DataLayer
                 studname = Console.ReadLine();
                 Console.Write("Enter Section here: ");
                 section = Console.ReadLine();
-                Console.Write("Enter Grade here: ");
-                grade = Convert.ToInt32(Console.ReadLine());
+              
+               
 
                 studentnameupper = studname.ToUpper();
                 sectionupper = section.ToUpper();
 
-                StudentInfo student = new(studentnameupper, sectionupper, grade);
-                StudentInfo.studentlist.Add(student);
+                Student student = new(studentnameupper, sectionupper);
+                studentlist.Add(student);
+
+                Console.WriteLine("");
             }
             catch (Exception e)
             {
                 Console.WriteLine("An Invalid Input was detected, returning to main menu");
-                StudentInfo.studentlist.RemoveAt(StudentInfo.studentlist.Count - 1);
+                studentlist.RemoveAt(studentlist.Count - 1);
 
             }
 
@@ -62,14 +70,17 @@ namespace DataLayer
 
         public static void GetStudentInfo()
         {
-            foreach (StudentInfo student in StudentInfo.studentlist)
+            foreach (Student student in studentlist)
             {
                 Console.WriteLine($"Name: {student.Studentname}");
                 Console.WriteLine($"Section: {student.Section}");
-                Console.WriteLine($"Grade: {student.Grade}");
+                Console.WriteLine($"Seatwork Grade: {student.SeatworkGrade}");
+
                 Console.WriteLine("");
             }
         }
+
+       
 
     }
 }

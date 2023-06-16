@@ -1,4 +1,6 @@
 ﻿using System;
+using BusinessLayer;
+using DataLayer;
 
 namespace GUI
 {
@@ -43,7 +45,7 @@ namespace GUI
 
         public static void SpecialStudentGradeGUI()
         {
-
+            
             ViewGradingOptions();
             int gradeselectmenu = ViewGradingSelect();
 
@@ -53,7 +55,7 @@ namespace GUI
                 {
                     case 1:
                         Console.WriteLine("Seatworks");
-
+                        SeatworkCheck.DynamicOrStatic();
                         Console.WriteLine("");
                         ViewGradingOptions();
                         gradeselectmenu = ViewGradingSelect();

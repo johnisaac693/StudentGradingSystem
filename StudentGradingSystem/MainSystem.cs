@@ -16,7 +16,7 @@ public class MainSystem
     static void Main(string[] args)
     {
 
-        if (ProfessorInfo.FacultyCheck() == true)
+        if (ProfessorInfo.FacultyCheck())
         {
             
             Console.WriteLine("Welcome to the Grading System");
