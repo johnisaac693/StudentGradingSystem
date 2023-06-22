@@ -26,7 +26,6 @@ namespace BusinessLayer
                     if (score > Constantitems)
                     {
                         Console.WriteLine("Score cannot be higher than item limit. Returning to Main Menu");
-                        StudentInfoMethods.studentlist.RemoveAt(StudentInfoMethods.studentlist.Count - 1);
                         return;
                     }
 
@@ -75,7 +74,6 @@ namespace BusinessLayer
                     if (score > Dynamicitems)
                     {
                         Console.WriteLine("Score cannot be higher than constant item. Returning to Main Menu");
-                        StudentInfoMethods.studentlist.RemoveAt(StudentInfoMethods.studentlist.Count - 1);
                         return;
                     }
                 }
@@ -124,35 +122,44 @@ namespace BusinessLayer
 
     public class SeatworkCheck
     {
-        public static int NumberofItemsChecker ()
+        public static void NumberofItemsChecker ()//CALL METHOD
         {
             int Numberofworks;
             Console.Write("Enter how many works you need: ");
             Numberofworks = Convert.ToInt32(Console.ReadLine());
 
-            return Numberofworks;
+            if (DynamicOrStatic() == true)
+            {
+                SeatworkFormulas.ConstantItemScore(Numberofworks);
+            }
+            else
+            {
+                SeatworkFormulas.DynamicItemScore(Numberofworks);
+            }
+
+
+
+           
 
         }
 
-        public static void DynamicOrStatic()//CALL THIS METHOD
+        public static bool DynamicOrStatic()
         {
      
             Console.Write("Do your Seatworks share the same number of items?: Yes or No?");
-            string choicemaker = Console.ReadLine().ToLower();
-
-            if (choicemaker == "yes")
-            {
-               
-                int seatworkamounts = NumberofItemsChecker();
-                SeatworkFormulas.ConstantItemScore(seatworkamounts);
-                
+            string choicemaker = Console.ReadLine();
+            string choicemade = choicemaker.ToLower();
+            bool result;
+            if (choicemade == "yes")
+            {               
+                result = true;
             }
             else 
             {
-                
-                int seatworkamounts = NumberofItemsChecker();
-                SeatworkFormulas.ConstantItemScore(seatworkamounts);
+                result = false;
             }
+
+            return result;
         }
 
 
