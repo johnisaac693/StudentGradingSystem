@@ -32,7 +32,7 @@ public class MainSystem
                         
 
                         Console.WriteLine("");// Linebreak for when the menu activates
-                        StudentInfoMethods.CreateStudent();
+                        UserInterfaces.CreateStudent();
                         UserInterfaces.ViewMenu();
 
                         //Enter Student Info - Press 1  
