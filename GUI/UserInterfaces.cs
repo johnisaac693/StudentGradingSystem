@@ -1,6 +1,7 @@
 ﻿using System;
 using BusinessLayer;
 using DataLayer;
+using Models;
 
 namespace GUI
 {
