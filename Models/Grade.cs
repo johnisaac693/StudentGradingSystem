@@ -6,7 +6,25 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    internal class Grade
+    public class Grade
     {
+        public string Studentname { get; set; }
+        public double Seatworkgrade { get; set; }
+        public double Quizgrade { get; set; }
+        public double Recitgrade { get; set; }
+        public double Attendancegrade { get; set; }
+        public double Projectgrade { get; set; }
+        public double Totalgrade { get; set; }
+
+        public double Examgrade { get; set; }
+
+        public double Midtermgrade { get; set; }
+
+        public double Finalgrade { get; set; }
+
+        public Grade(string studentname)
+        {
+            Studentname = studentname ?? throw new ArgumentNullException(nameof(studentname));
+        }
     }
 }
