@@ -2,15 +2,21 @@
 
 namespace BusinessLayer
 {
-    public class SeatworkFormulas
+    public class GradeFormulas
     {
 
-        public static double QuizSeatworkGradeCompute(double sum, double itemtotal)
+        public static double GradeCompute(double sum, double itemtotal)
         {
             double grade = (sum / itemtotal) * 100;
 
             return grade;
         }
+
+
+
+
     }
+
+    
 
 }
