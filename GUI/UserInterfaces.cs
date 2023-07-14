@@ -65,7 +65,7 @@ namespace GUI
             {
                 Console.WriteLine(option);
             }
-
+            Console.WriteLine("");
         }
 
         
@@ -108,6 +108,7 @@ namespace GUI
                 Console.WriteLine("Attendance Grade: " +grades.Attendancegrade);
 
             }
+            Console.WriteLine("");
         }
 
 

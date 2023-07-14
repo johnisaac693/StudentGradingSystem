@@ -24,10 +24,10 @@ namespace GUI
                 switch (gradeselectmenu)
                 {
                     case 1:
-                        HandleSeatworks(studentName);
+                        HandleSeatworks(studentName, gradeselectmenu);
                         break;
                     case 2:
-                        HandleQuizzes(studentName);
+                        HandleQuizzes(studentName, gradeselectmenu);
                         break;
                     case 3:
                         HandleRecitations();
@@ -51,22 +51,22 @@ namespace GUI
             }
         }
 
-        private static void HandleSeatworks(string studentName)
+        private static void HandleSeatworks(string studentName, int select)
         {
             Console.WriteLine("Seatworks");
             int itemnos = NumberofItemsChecker();
             double score = DynamicOrStatic() ? ConstantItemScore(itemnos) : DynamicItemScore(itemnos);
-            AddGrade(score, studentName);
-            Console.WriteLine();
+            AddGrade(score, studentName, select);
+            Console.WriteLine("");
         }
 
-        private static void HandleQuizzes(string studentName)
+        private static void HandleQuizzes(string studentName, int select)
         {
             Console.WriteLine("Quizzes");
             int itemnos = NumberofItemsChecker();
             double score = DynamicOrStatic() ? ConstantItemScore(itemnos) : DynamicItemScore(itemnos);
-            AddGrade(score, studentName);
-            Console.WriteLine();
+            AddGrade(score, studentName, select);
+            Console.WriteLine("");
         }
 
         private static void HandleRecitations()
@@ -210,21 +210,16 @@ namespace GUI
             return numberofworks;
         } 
 
-        public static void AddGrade(double grade, string studentName)
+        public static void AddGrade(double grade, string studentName, int select)
         {
             foreach (Grade grades in GradeMemory.Gradelist)
             {
                 if (grades.Studentname.Contains(studentName))
                 {
-                    Console.WriteLine("Which category do you need to add this grade to?");
-                    ViewGradingOptions();
 
-                    Console.WriteLine();
+                   
 
-                    Console.Write("Enter the category: ");
-                    int categoryName = Convert.ToInt32(Console.ReadLine());
-
-                    switch (categoryName)
+                    switch (select)
                     {
                         case 1:
                             grades.Seatworkgrade = grade;
