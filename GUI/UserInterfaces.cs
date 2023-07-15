@@ -7,6 +7,10 @@ namespace GUI
 {
     public class UserInterfaces
     {
+
+
+        GradeConnectDB gradedb = new GradeConnectDB();
+
         //LISTS
        public static readonly List<string> MenuOptions = new()
      {"Create New Grade Info - Press 1", "View Grades Inputted - 2", "Input Grades - Press 3", "Exit - 0"};
@@ -18,7 +22,7 @@ namespace GUI
 
         //MENU METHODS
 
-        public static void MainMenu()
+        public void MainMenu()
         {
             Console.WriteLine("Welcome to the Grading System");
             Console.WriteLine("Here are your options:");
@@ -32,7 +36,6 @@ namespace GUI
                     case 1:
                         Console.WriteLine();
                         CreateGrade();
-                        
                         break;
 
                     case 2:
@@ -75,23 +78,26 @@ namespace GUI
 
 
         //MENU FUNCTIONS
-        public static void CreateGrade()
+        public void CreateGrade()
         {
+            
             try
             {
                 Console.WriteLine();
                 Console.Write("Enter Name of Student to Grade: ");
                 string studname = Console.ReadLine()?.Trim().ToUpper();
 
-                Grade grade = new Grade(studname);
-                GradeMemory.Gradelist.Add(grade);
+                Grade grade = new Grade();
+                grade.Studentname = studname;
+                gradedb.CreateGrade(grade);
+
 
                 Console.WriteLine();
             }
             catch (Exception e)
             {
                 Console.WriteLine("An Invalid Input was detected, returning to the main menu");
-                GradeMemory.Gradelist.RemoveAt(GradeMemory.Gradelist.Count - 1);
+                
             }
         }
 

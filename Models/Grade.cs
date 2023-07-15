@@ -22,9 +22,6 @@ namespace Models
 
         public double Finalgrade { get; set; }
 
-        public Grade(string studentname)
-        {
-            Studentname = studentname ?? throw new ArgumentNullException(nameof(studentname));
-        }
+        
     }
 }

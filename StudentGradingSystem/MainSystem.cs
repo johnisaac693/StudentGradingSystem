@@ -15,10 +15,10 @@ public class MainSystem
    
     static void Main(string[] args)
     {
-
+        UserInterfaces UI = new UserInterfaces();
         if (ProfessorInfo.FacultyCheck())
         {
-            UserInterfaces.MainMenu();
+            UI.MainMenu();
         }
         else 
         {

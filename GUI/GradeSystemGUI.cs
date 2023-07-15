@@ -72,6 +72,7 @@ namespace GUI
         private static void HandleRecitations()
         {
             Console.WriteLine("Recitations");
+
             Console.WriteLine();
         }
 
@@ -209,6 +210,8 @@ namespace GUI
 
             return numberofworks;
         } 
+
+        
 
         public static void AddGrade(double grade, string studentName, int select)
         {
