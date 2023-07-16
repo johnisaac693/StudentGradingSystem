@@ -11,7 +11,7 @@ namespace DataLayer
 {
     public class SQLDATABASE
     {
-
+        //creating connection
         
         static string ConnectString = "Data Source=localhost; Initial Catalog = GradingSystem; Integrated Security = True;";
 
