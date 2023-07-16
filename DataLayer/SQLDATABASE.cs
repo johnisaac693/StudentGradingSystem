@@ -11,14 +11,11 @@ namespace DataLayer
 {
     public class SQLDATABASE
     {
-<<<<<<< Updated upstream
-        string Connectionsstring;
-        static string ConnectString = "Data Source =MSI; Initial Catalog = GradingSystem; Integrated Security = True;";
-=======
+
         
         static string ConnectString = "Data Source=localhost; Initial Catalog = GradingSystem; Integrated Security = True;";
->>>>>>> Stashed changes
-        // SqlConnection connect = new SqlConnection(ConnectString);
+
+        SqlConnection connect = new SqlConnection(ConnectString);
 
         static SqlConnection connection;
 
