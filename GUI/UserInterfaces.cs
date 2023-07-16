@@ -9,7 +9,7 @@ namespace GUI
     {
 
 
-        GradeConnectDB gradedb = new GradeConnectDB();
+        GradesDataService gradedb = new GradesDataService();
 
         //LISTS
        public static readonly List<string> MenuOptions = new()
@@ -81,8 +81,8 @@ namespace GUI
         public void CreateGrade()
         {
             
-            try
-            {
+            //try
+            //{
                 Console.WriteLine();
                 Console.Write("Enter Name of Student to Grade: ");
                 string studname = Console.ReadLine()?.Trim().ToUpper();
@@ -93,12 +93,12 @@ namespace GUI
 
 
                 Console.WriteLine();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("An Invalid Input was detected, returning to the main menu");
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine("An Invalid Input was detected, returning to the main menu");
                 
-            }
+            //}
         }
 
         public static void ViewGrade()

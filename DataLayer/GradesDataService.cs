@@ -7,8 +7,10 @@ using Models;
 
 namespace DataLayer
 {
-    public class GradeConnectDB
+    public class GradesDataService
     {
+        private List<Grade> Grades { get; set; }
+        
         SQLDATABASE detabes = new SQLDATABASE();
 
         

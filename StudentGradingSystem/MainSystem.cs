@@ -13,7 +13,7 @@ public class MainSystem
     
 
    
-    static void Main(string[] args)
+    static void Main()
     {
         UserInterfaces UI = new UserInterfaces();
         if (ProfessorInfo.FacultyCheck())

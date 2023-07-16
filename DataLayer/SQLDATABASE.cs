@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Models;
@@ -13,86 +14,61 @@ namespace DataLayer
     {
 
         static string ConnectString = "Data Source=localhost; Initial Catalog = GradingSystem; Integrated Security = True;";
-        // SqlConnection connect = new SqlConnection(ConnectString);
+        
 
-        static SqlConnection connection;
+        static SqlConnection sqlconnection;
 
         public SQLDATABASE()
         {
-            connection = new SqlConnection(ConnectString);
+            sqlconnection = new SqlConnection(ConnectString);
         }
 
         public static void Connect()
         {
-            connection.Open();
+            sqlconnection.Open();
         }
 
         public void CreateGradeData(Grade gradedata)
         {
+            sqlconnection.Open();
+            var insertStatement = "INSERT INTO GRADE (Name) VALUES (@Name)";
 
-            var insertStatement = "INSERT INTO GRADE VALUES (@Name)";
-
-            SqlCommand insertcommand = new SqlCommand(insertStatement, connection);
+            SqlCommand insertcommand = new SqlCommand(insertStatement, sqlconnection);
             insertcommand.Parameters.AddWithValue("@Name", gradedata.Studentname);
-            connection.Open();
+            
 
             insertcommand.ExecuteNonQuery();
 
-            connection.Close();
+            sqlconnection.Close();
 
 
-
-        }
-
-        public double UpdateSeatworkGrade(Grade gradedata)
-        {
-            double success;
-            var updateStatement = "UPDATE Grade SET Grade = @SeatWork WHERE Name = @Name";
-
-            SqlCommand insertcommand = new SqlCommand(updateStatement, connection);
-            insertcommand.Parameters.AddWithValue("@SeatWork", gradedata.Seatworkgrade);
-            connection.Open();
-
-            success = insertcommand.ExecuteNonQuery();
-
-            connection.Close();
-
-            return success;
+            
 
         }
 
 
+        //public List<Grade> GetGrades() {
 
-        public List<Grade> GetGrades()
-        {
-            var selectStatement = "SELECT * FROM GRADE";
-            SqlCommand selectcommand = new SqlCommand(selectStatement, connection);
-            connection.Open();
+        //    var selectStatement = "SELECT * FROM Grade";
+        //    SqlCommand selectcommand = new SqlCommand(selectStatement, sqlconnection);
+        //    sqlconnection.Open();
 
-            SqlDataReader reader = selectcommand.ExecuteReader();
+        //    SqlDataReader reader = selectcommand.ExecuteReader();
 
-            var grades = new List<Grade>();
+        //    var Grades = new List<Grade>();
 
-            while (reader.Read())
-            {
-                grades.Add(new Grade
-                {
-                    Studentname = reader["Name"].ToString(),
-                    Seatworkgrade = Convert.ToDouble(reader["Seatworkgrade"].ToString()),
-                    Quizgrade = Convert.ToDouble(reader["Quizgrade"].ToString()),
-                    Recitgrade = Convert.ToDouble(reader["Recitgrade"].ToString()),
-                    Attendancegrade = Convert.ToDouble(reader["Attendancegrade"].ToString()),
-                    Projectgrade = Convert.ToDouble(reader["Projectgrade"].ToString()),
-                    Totalgrade = Convert.ToDouble(reader["Totalgrade"].ToString()),
-                    Examgrade = Convert.ToDouble(reader["Examgrade"].ToString()),
-                    Midtermgrade = Convert.ToDouble(reader["Midtermgrade"].ToString()),
-                    Finalgrade = Convert.ToDouble(reader["Finalgrade"].ToString()),
-                });
-            }
-            connection.Close();
-            return grades;
+        //    while (reader.Read())
+        //    {
+        //        Grades.Add(new Grade()
+        //        {
+        //        Studentname = 
+                
+                
+        //        });
+        //    }
 
-        }
+        //}
+       
     }
 }
 
