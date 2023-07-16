@@ -19,5 +19,10 @@ namespace DataLayer
         {
             detabes.CreateGradeData(gradedata);
         }
+
+        public List <Grade> getGrades () 
+        {
+            return Grades;
+        }
     }
 }
