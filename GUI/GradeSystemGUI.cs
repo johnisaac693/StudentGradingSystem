@@ -138,9 +138,14 @@ namespace GUI
 
                 Console.WriteLine("Your Grade is: {0}", grade);
 
+                //BEGINO
+                GradesDataService gradedb = new GradesDataService();
+                Grade grades = new Grade();
+                grades.Seatworkgrade = grade;
+                gradedb.InsertSeatWorkGrade(grades);
 
                 return (double)grade;
-                //
+                
                 //Grades.Add(grade);
             }
             catch

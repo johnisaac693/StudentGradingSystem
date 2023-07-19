@@ -24,5 +24,10 @@ namespace DataLayer
         {
             return Grades;
         }
+
+        public void InsertSeatWorkGrade(Grade SW)
+        {
+            detabes.InsertSeatWorkGrade(SW);
+        }
     }
 }

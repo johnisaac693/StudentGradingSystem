@@ -46,6 +46,21 @@ namespace DataLayer
 
         }
 
+        //SeatWork insert in DB
+        public void InsertSeatWorkGrade(Grade SW)
+        {
+            sqlconnection.Open();
+            var insertStatement = "INSERT INTO GRADE (SeatWork) VALUES (@SeatWork)";
+
+            SqlCommand insertCommand = new SqlCommand(insertStatement, sqlconnection);
+
+            insertCommand.Parameters.AddWithValue("@SeatWork", SW.Seatworkgrade);
+            
+            insertCommand.ExecuteNonQuery();
+            
+            sqlconnection.Close();
+        }
+
 
         //public List<Grade> GetGrades() {
 
