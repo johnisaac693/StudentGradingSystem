@@ -9,12 +9,16 @@ using System.Threading.Tasks;
 
 namespace GUI
 {
-    public class GradeSystemGUI
-    {
+
+    
+    public class GradeSystemGUI{
+
+        AddGradeRules gradingrules = new AddGradeRules();
+        GradesDataService gradedb = new GradesDataService();
         public static readonly List<string> GradingOptions = new()
      {"Seatworks - Press 1", "Quizzes - Press 2", "Recitations - Press 3", "Performance Tasks - 4", "Midterms - 5", "Finals - 6", "Back - 0"};
 
-        public static void SpecialStudentGradeGUI(string studentName)
+        public void SpecialStudentGradeGUI(string studentName)
         {
             ViewGradingOptions();
 
@@ -51,7 +55,7 @@ namespace GUI
             }
         }
 
-        private static void HandleSeatworks(string studentName, int select)
+        private void HandleSeatworks(string studentName, int select)
         {
             Console.WriteLine("Seatworks");
             int itemnos = NumberofItemsChecker();
@@ -60,7 +64,7 @@ namespace GUI
             Console.WriteLine("");
         }
 
-        private static void HandleQuizzes(string studentName, int select)
+        private void HandleQuizzes(string studentName, int select)
         {
             Console.WriteLine("Quizzes");
             int itemnos = NumberofItemsChecker();
@@ -69,33 +73,33 @@ namespace GUI
             Console.WriteLine("");
         }
 
-        private static void HandleRecitations()
+        private void HandleRecitations()
         {
             Console.WriteLine("Recitations");
 
             Console.WriteLine();
         }
 
-        private static void HandlePerformanceTasks()
+        private void HandlePerformanceTasks()
         {
             Console.WriteLine("Performance Tasks");
             Console.WriteLine();
         }
 
-        private static void HandleMidterms()
+        private void HandleMidterms()
         {
             Console.WriteLine("Midterms");
             Console.WriteLine();
         }
 
-        private static void HandleFinals()
+        private void HandleFinals()
         {
             Console.WriteLine("Finals");
             Console.WriteLine();
         }
 
 
-        public static void ViewGradingOptions() // View Grading Options
+        public void ViewGradingOptions() // View Grading Options
         {
             foreach (var option in GradingOptions)
             {
@@ -214,41 +218,27 @@ namespace GUI
             int numberofworks = Convert.ToInt32(Console.ReadLine());
 
             return numberofworks;
-        } 
+        }
 
-        
 
-        public static void AddGrade(double grade, string studentName, int select)
+
+        public void AddGrade(double grade, string studentName, int select)
         {
-            foreach (Grade grades in GradeMemory.Gradelist)
+            
             {
-                if (grades.Studentname.Contains(studentName))
+                switch (select)
                 {
+                    case 1:
+                        gradingrules.InsertSeatworkGrade(grade, studentName);
+                        break;
 
-                   
-
-                    switch (select)
-                    {
-                        case 1:
-                            grades.Seatworkgrade = grade;
-                            Console.WriteLine("Grade added to " +studentName);
-                            break;
-                        case 2:
-                            grades.Quizgrade = grade;
-                            Console.WriteLine("Quiz grade added to " + studentName);
-                            break;
-                        case 3:
-                            grades.Quizgrade = grade;
-                            Console.WriteLine("Quiz grade added to " + studentName);
-                            break;
-                        // Add more cases for other categories as needed
-                        default:
-                            Console.WriteLine("Invalid category selection. Grade not added.");
-                            break;
-                    }
                 }
+
+
+
             }
         }
+        
 
        
 

@@ -8,8 +8,9 @@ namespace GUI
     public class UserInterfaces
     {
 
-
         GradesDataService gradedb = new GradesDataService();
+        GradeSystemGUI gradegui = new GradeSystemGUI();
+        
 
         //LISTS
        public static readonly List<string> MenuOptions = new()
@@ -49,7 +50,7 @@ namespace GUI
                         Console.WriteLine();
                         Console.WriteLine("Input grades");
                         string studentchoice = ChooseStudent();
-                        GradeSystemGUI.SpecialStudentGradeGUI(studentchoice);
+                        gradegui.SpecialStudentGradeGUI(studentchoice);
                         
                         break;
 
@@ -81,8 +82,7 @@ namespace GUI
         public void CreateGrade()
         {
             
-            //try
-            //{
+           
                 Console.WriteLine();
                 Console.Write("Enter Name of Student to Grade: ");
                 string studname = Console.ReadLine()?.Trim().ToUpper();
@@ -92,40 +92,38 @@ namespace GUI
                 gradedb.CreateGrade(grade);
 
 
-                Console.WriteLine();
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine("An Invalid Input was detected, returning to the main menu");
-                
-            //}
+            
         }
 
-        public static void ViewGrade()
+        public void ViewGrade()
         {
-            foreach (Grade grades in GradeMemory.Gradelist)
+          
+            var grades = gradedb.getGrades();
+            foreach (var gradingdata in grades)
             {
-                Console.WriteLine("Student Name: " + grades.Studentname);
-                Console.WriteLine("Seatwork Grade: " +grades.Seatworkgrade);
-                Console.WriteLine("Quiz Grade: " + grades.Quizgrade);
-                Console.WriteLine("Project Grade: " + grades.Projectgrade);
-                Console.WriteLine("Recitation Grade: " + grades.Recitgrade);
-                Console.WriteLine("Exam Grade: " + grades.Examgrade);
-                Console.WriteLine("Attendance Grade: " +grades.Attendancegrade);
+                Console.WriteLine("Student Name: " + gradingdata.Studentname);
+                Console.WriteLine("Seatwork Grade: " + gradingdata.Seatworkgrade);
+                Console.WriteLine("Quiz Grade: " + gradingdata.Quizgrade);
+                Console.WriteLine("Project Grade: " + gradingdata.Projectgrade);
+                Console.WriteLine("Recitation Grade: " + gradingdata.Recitgrade);
+                Console.WriteLine("Exam Grade: " + gradingdata.Examgrade);
+                Console.WriteLine("Attendance Grade: " + gradingdata.Attendancegrade);
 
+                Console.WriteLine(" ");
             }
-            Console.WriteLine("");
+            Console.WriteLine(" ");
         }
 
 
-        public static string ChooseStudent()
+        public string ChooseStudent()
         {
 
             Console.WriteLine("Choose which student whose grade you choose to modify");
 
-            foreach (Grade grade in GradeMemory.Gradelist)
+            var names = gradedb.GetNames();
+            foreach (var name in names)
             {
-                Console.WriteLine(grade.Studentname);
+                Console.WriteLine(name.Studentname);
             }
             Console.Write("Enter name: ");
             string Student = Console.ReadLine()?.Trim().ToUpper();

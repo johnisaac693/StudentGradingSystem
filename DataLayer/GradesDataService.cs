@@ -9,7 +9,7 @@ namespace DataLayer
 {
     public class GradesDataService
     {
-        private List<Grade> Grades { get; set; }
+        
         
         SQLDATABASE detabes = new SQLDATABASE();
 
@@ -22,12 +22,24 @@ namespace DataLayer
 
         public List <Grade> getGrades () 
         {
-            return Grades;
+            return detabes.GetGrades();
+        }
+
+        public List<Grade> GetNames()
+        {
+            return detabes.GetNames();
+
         }
 
         public void InsertSeatWorkGrade(Grade SW)
         {
             detabes.InsertSeatWorkGrade(SW);
         }
+
+        public Grade GetSWGradesByName(string Name)
+        {
+            return detabes.GetSWGradeByName(Name);
+        }
+
     }
 }
