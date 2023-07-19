@@ -50,15 +50,15 @@ namespace DataLayer
         public void InsertSeatWorkGrade(Grade SW)
         {
             sqlconnection.Open();
-            var insertStatement = "INSERT INTO GRADE (SeatWork) VALUES (@SeatWork) WHERE Name = @Name";
+            var updateStatement = "UPDATE GRADE SET SeatWork = @SeatWork WHERE Name = @Name";
 
-            SqlCommand insertCommand = new SqlCommand(insertStatement, sqlconnection);
+            SqlCommand updateCommand = new SqlCommand(updateStatement, sqlconnection);
 
-            insertCommand.Parameters.AddWithValue("@SeatWork", SW.Seatworkgrade);
-            insertCommand.Parameters.AddWithValue("@Name", SW.Studentname);
+            updateCommand.Parameters.AddWithValue("@SeatWork", SW.Seatworkgrade);
+            updateCommand.Parameters.AddWithValue("@Name", SW.Studentname);
 
-            insertCommand.ExecuteNonQuery();
-            
+            updateCommand.ExecuteNonQuery();
+
             sqlconnection.Close();
         }
 
@@ -118,7 +118,7 @@ namespace DataLayer
             sqlconnection.Close(); return Names;
         }
 
-         public Grade GetSWGradeByName(string name)
+         public Grade GetGradeByName(string name)
         {
             var selectStatement = "SELECT * FROM Grade WHERE Name = @Name";
             SqlCommand selectcommand = new SqlCommand(selectStatement, sqlconnection);
@@ -146,7 +146,8 @@ namespace DataLayer
 
                 };
             }
-            sqlconnection.Close(); return grade;
+            sqlconnection.Close(); 
+            return grade;
         }
 
 

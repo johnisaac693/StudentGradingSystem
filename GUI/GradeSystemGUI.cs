@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace GUI
 {
@@ -13,7 +14,7 @@ namespace GUI
     
     public class GradeSystemGUI{
 
-        AddGradeRules gradingrules = new AddGradeRules();
+       
         GradesDataService gradedb = new GradesDataService();
         public static readonly List<string> GradingOptions = new()
      {"Seatworks - Press 1", "Quizzes - Press 2", "Recitations - Press 3", "Performance Tasks - 4", "Midterms - 5", "Finals - 6", "Back - 0"};
@@ -115,8 +116,7 @@ namespace GUI
 
 
 
-            try
-            {
+            
                 int Constantitems;
                 int score;
                 double sum = 0.0;
@@ -142,21 +142,11 @@ namespace GUI
 
                 Console.WriteLine("Your Grade is: {0}", grade);
 
-                //BEGINO
-                GradesDataService gradedb = new GradesDataService();
-                Grade grades = new Grade();
-                grades.Seatworkgrade = grade;
-                gradedb.InsertSeatWorkGrade(grades);
-
+                
                 return (double)grade;
                 
                 //Grades.Add(grade);
-            }
-            catch
-            {
-                Console.WriteLine("An Invalid Input was Detected");
-                return -1;
-            }
+           
 
 
         }
@@ -226,15 +216,20 @@ namespace GUI
         {
             
             {
-                switch (select)
+                Grade gradedata = gradedb.GetGradesByName(studentName);
+
+                if (gradedata != null)
                 {
-                    case 1:
-                        gradingrules.InsertSeatworkGrade(grade, studentName);
-                        break;
+                    switch (select)
+                    {
+                        case 1:
+                            gradedata.Seatworkgrade = grade;
+                           gradedb.InsertSeatWorkGrade(gradedata);
+                            break;
+
+                    }
 
                 }
-
-
 
             }
         }
