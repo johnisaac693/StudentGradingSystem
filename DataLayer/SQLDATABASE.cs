@@ -135,6 +135,15 @@ namespace DataLayer
                 {
                     Studentname = reader["Name"].ToString(),
                     Seatworkgrade = Convert.ToDouble(reader["SeatWork"].ToString()),
+                    Quizgrade = Convert.ToDouble(reader["Quiz"].ToString()),
+                    Recitgrade = Convert.ToDouble(reader["Recitation"].ToString()),
+                    Attendancegrade = Convert.ToDouble(reader["Attendance"].ToString()),
+                    Projectgrade = Convert.ToDouble(reader["Project"].ToString()),
+                    Examgrade = Convert.ToDouble(reader["Exam"].ToString()),
+                    Midtermgrade = Convert.ToDouble(reader["Midterm"].ToString()),
+                    Finalgrade = Convert.ToDouble(reader["Final"].ToString()),
+                    Totalgrade = Convert.ToDouble(reader["TotalGrade"].ToString()),
+
                 };
             }
             sqlconnection.Close(); return grade;

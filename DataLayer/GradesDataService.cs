@@ -36,9 +36,9 @@ namespace DataLayer
             detabes.InsertSeatWorkGrade(SW);
         }
 
-        public Grade GetSWGradesByName(string Name)
+        public Grade GetGradesByName(string Name)
         {
-            return detabes.GetSWGradeByName(Name);
+            return detabes.GetGradeByName(Name);
         }
 
     }
