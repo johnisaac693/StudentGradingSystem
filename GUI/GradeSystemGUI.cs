@@ -108,15 +108,14 @@ namespace GUI
             }
         }
 
-       
+
 
         //Grading System GUI
         public static double ConstantItemScore(int x) //If the Written Works share the same number of items
         {
 
-
-
-            
+            try
+            {
                 int Constantitems;
                 int score;
                 double sum = 0.0;
@@ -131,7 +130,7 @@ namespace GUI
                     if (score > Constantitems)
                     {
                         throw new ArgumentException("Score cannot be higher than the number of items!");
-                        
+
                     }
 
                 }
@@ -142,14 +141,22 @@ namespace GUI
 
                 Console.WriteLine("Your Grade is: {0}", grade);
 
-                
+
                 return (double)grade;
-                
-                //Grades.Add(grade);
-           
+               
+            }
+            catch
+            {
+                Console.WriteLine("An Invalid Input was Detected");
+                return -1;
+            }
 
 
         }
+
+
+
+
         public static double DynamicItemScore(int x) //If the Written Works have different number of items
         {
 
