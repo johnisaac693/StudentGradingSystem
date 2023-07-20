@@ -118,7 +118,7 @@ namespace GUI
         public string ChooseStudent()
         {
 
-            Console.WriteLine("Choose which student whose grade you choose to modify");
+            Console.WriteLine("Enter the name of the student whose grade you wish to modify: ");
 
             var names = gradedb.GetNames();
             foreach (var name in names)

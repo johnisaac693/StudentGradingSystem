@@ -36,6 +36,23 @@ namespace DataLayer
             detabes.InsertSeatWorkGrade(SW);
         }
 
+        public void InsertQuizGrade(Grade QUIZ)
+        {
+            detabes.InsertQuizGrade(QUIZ);
+        }
+        public void InsertRecitationGrade(Grade RECI)
+        {
+            detabes.InsertRecitationGrade(RECI);
+        }
+        public void InsertProjectGrade(Grade PROJECT)
+        {
+            detabes.InsertProjectGrade(PROJECT);
+        }
+        public void InsertAttendanceGrade(Grade ATTENDANCE)
+        {
+            detabes.InsertAttendanceGrade(ATTENDANCE);
+        }
+
         public Grade GetGradesByName(string Name)
         {
             return detabes.GetGradeByName(Name);

@@ -17,7 +17,7 @@ namespace GUI
        
         GradesDataService gradedb = new GradesDataService();
         public static readonly List<string> GradingOptions = new()
-     {"Seatworks - Press 1", "Quizzes - Press 2", "Recitations - Press 3", "Performance Tasks - 4", "Midterms - 5", "Finals - 6", "Back - 0"};
+     {"Seatworks - Press 1", "Quizzes - Press 2", "Recitations - Press 3", "Midterm - 4", "Finals - 5", "Project - 6", "Attendance - 7", "Total Grade - 8", "Back - 0"};
 
         public void SpecialStudentGradeGUI(string studentName)
         {
@@ -35,7 +35,7 @@ namespace GUI
                         HandleQuizzes(studentName, gradeselectmenu);
                         break;
                     case 3:
-                        HandleRecitations();
+                        HandleRecitations(studentName, gradeselectmenu);
                         break;
                     case 4:
                         HandlePerformanceTasks();
@@ -45,6 +45,12 @@ namespace GUI
                         break;
                     case 6:
                         HandleFinals();
+                        break;
+                    case 7:
+                        HandleProject(studentName, gradeselectmenu);
+                        break;
+                    case 8:
+                        HandleAttendance(studentName, gradeselectmenu);
                         break;
                     default:
                         gradeselectmenu = 0;
@@ -74,9 +80,11 @@ namespace GUI
             Console.WriteLine("");
         }
 
-        private void HandleRecitations()
+        private void HandleRecitations(string studentName, int select)
         {
             Console.WriteLine("Recitations");
+            double score = RecitationCompute();
+            AddGrade(score, studentName, select);
 
             Console.WriteLine();
         }
@@ -96,6 +104,39 @@ namespace GUI
         private void HandleFinals()
         {
             Console.WriteLine("Finals");
+            Console.WriteLine();
+        }
+
+        private void HandleExams()
+        {
+            Console.WriteLine("Exams");
+        }
+
+        private void HandleProject(string studentName, int select) 
+        {
+            Console.WriteLine("Project");
+            double score = ProjectCompute();
+            AddGrade(score, studentName, select);
+
+            Console.WriteLine();
+        }
+
+        private void HandleAttendance(string studentName, int select)
+        {
+            Console.WriteLine("Attendance");
+            double daystotal = NoOfDays();
+            double daysattended = DaysAttended();
+            double score = GradeFormulas.AttendanceCompute(daysattended, daystotal);
+            AddGrade(score, studentName, select);
+           Console.WriteLine();
+        }
+
+        private void HandleTotalGrade(string studentName, int select)
+        {
+            Console.WriteLine("Total Grade");
+
+
+
             Console.WriteLine();
         }
 
@@ -154,7 +195,37 @@ namespace GUI
 
         }
 
+        public static double RecitationCompute()
+        {
+            double reciGrade;
+            Console.Write("What is the student's recitation grade? (out of 100)?: ");
+            reciGrade = Convert.ToDouble(Console.ReadLine());
+            return (double)reciGrade;
+        }
 
+        public static double ProjectCompute()
+        {
+            double projectGrade;
+            Console.Write("What is the student's projet grade? (out of 100)?: ");
+            projectGrade = Convert.ToDouble(Console.ReadLine());
+            return (double)projectGrade;
+        }
+
+        public static double NoOfDays()
+        {
+            Console.Write("How many days were in the term?: ");
+            double days = Convert.ToInt32(Console.ReadLine());
+
+            return days;
+        }
+
+        public static double DaysAttended()
+        {
+
+            Console.Write("How many days did this student attend?: ");
+            double daysattend = Convert.ToInt32(Console.ReadLine());
+            return daysattend;
+        }
 
 
         public static double DynamicItemScore(int x) //If the Written Works have different number of items
@@ -233,6 +304,40 @@ namespace GUI
                             gradedata.Seatworkgrade = grade;
                            gradedb.InsertSeatWorkGrade(gradedata);
                             break;
+
+                            case 2:
+                            gradedata.Quizgrade = grade;
+                            gradedb.InsertQuizGrade(gradedata);
+                            break;
+
+                            case 3:
+                            gradedata.Recitgrade = grade;
+                            gradedb.InsertRecitationGrade(gradedata);
+                            break;
+
+                            case 4:
+                            break;
+
+                            case 5:
+                            break;
+
+                            case 6:
+                            gradedata.Projectgrade = grade;
+                            gradedb.InsertProjectGrade(gradedata);
+                            break;
+
+                            case 7:
+                            gradedata.Attendancegrade = grade;
+                            gradedb.InsertAttendanceGrade(gradedata);
+                            Console.WriteLine("Your Attendance Grade is: " +gradedata.Attendancegrade);
+                            break;
+
+                            case 8:
+                            
+                            break;
+
+
+
 
                     }
 

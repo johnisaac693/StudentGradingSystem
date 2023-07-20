@@ -13,7 +13,7 @@ namespace DataLayer
     public class SQLDATABASE
     {
 
-        static string ConnectString = "Data Source=LAPTOP-D3L5LPUQ\\SQLEXPRESS01; Initial Catalog = GradingSystem; Integrated Security = True;";
+        static string ConnectString = "Data Source=localhost; Initial Catalog = GradingSystem; Integrated Security = True;";
         
 
         static SqlConnection sqlconnection;
@@ -62,6 +62,64 @@ namespace DataLayer
             sqlconnection.Close();
         }
 
+        public void InsertQuizGrade(Grade QUIZ)
+        {
+            sqlconnection.Open();
+            var updateStatement = "UPDATE GRADE SET Quiz = @Quiz WHERE Name = @Name";
+
+            SqlCommand updateCommand = new SqlCommand(updateStatement, sqlconnection);
+
+            updateCommand.Parameters.AddWithValue("@Quiz", QUIZ.Quizgrade);
+            updateCommand.Parameters.AddWithValue("@Name", QUIZ.Studentname);
+
+            updateCommand.ExecuteNonQuery();
+
+            sqlconnection.Close();
+        }
+        public void InsertRecitationGrade(Grade RECI)
+        {
+            sqlconnection.Open();
+            var updateStatement = "UPDATE GRADE SET Recitation = @Recitation WHERE Name = @Name";
+
+            SqlCommand updateCommand = new SqlCommand(updateStatement, sqlconnection);
+
+            updateCommand.Parameters.AddWithValue("@Recitation", RECI.Recitgrade);
+            updateCommand.Parameters.AddWithValue("@Name", RECI.Studentname);
+
+            updateCommand.ExecuteNonQuery();
+
+            sqlconnection.Close();
+        }
+
+        public void InsertProjectGrade(Grade PROJECT)
+        {
+            sqlconnection.Open();
+            var updateStatement = "UPDATE GRADE SET Project = @Project WHERE Name = @Name";
+
+            SqlCommand updateCommand = new SqlCommand(updateStatement, sqlconnection);
+
+            updateCommand.Parameters.AddWithValue("@Project", PROJECT.Projectgrade);
+            updateCommand.Parameters.AddWithValue("@Name", PROJECT.Studentname);
+
+            updateCommand.ExecuteNonQuery();
+
+            sqlconnection.Close();
+        }
+
+        public void InsertAttendanceGrade(Grade ATTENDANCE)
+        {
+            sqlconnection.Open();
+            var updateStatement = "UPDATE GRADE SET Attendance = @Attendance WHERE Name = @Name";
+
+            SqlCommand updateCommand = new SqlCommand(updateStatement, sqlconnection);
+
+            updateCommand.Parameters.AddWithValue("@Attendance", ATTENDANCE.Attendancegrade);
+            updateCommand.Parameters.AddWithValue("@Name", ATTENDANCE.Studentname);
+
+            updateCommand.ExecuteNonQuery();
+
+            sqlconnection.Close();
+        }
 
         public List<Grade> GetGrades()
         {
