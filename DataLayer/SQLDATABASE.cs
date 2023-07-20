@@ -28,7 +28,7 @@ namespace DataLayer
             sqlconnection.Open();
         }
 
-        public void CreateGradeData(Grade gradedata)
+        public void CreateGradeData(Grade gradedata)//Create Grade Data
         {
             sqlconnection.Open();
             var insertStatement = "INSERT INTO Grade (Name, SeatWork, Quiz, Recitation, Attendance, Project, Exam, Midterm, Final, TotalGrade) VALUES (@Name, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0); ";
