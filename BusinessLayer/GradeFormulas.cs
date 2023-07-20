@@ -26,7 +26,7 @@ namespace BusinessLayer
 
         public static double TabulateGrade(double swgrade, double qgrade, double recitgrade, double attgrade, double projgrade, double examgrade)
         {
-            double ClassStanding = ((swgrade + qgrade + recitgrade + attgrade + projgrade) / 5) * 100 * 0.7;
+            double ClassStanding = ((swgrade + qgrade + recitgrade + attgrade + projgrade) / 5) * 0.7;
             double ExamStanding = examgrade * 0.3;
 
             double TabulatedGrade = ClassStanding + ExamStanding;

@@ -108,6 +108,9 @@ namespace GUI
                 Console.WriteLine("Recitation Grade: " + gradingdata.Recitgrade);
                 Console.WriteLine("Exam Grade: " + gradingdata.Examgrade);
                 Console.WriteLine("Attendance Grade: " + gradingdata.Attendancegrade);
+                Console.WriteLine("Midterm Grade: " +gradingdata.Midtermgrade);
+                Console.WriteLine("Final Grade: " +gradingdata.Finalgrade);
+                Console.WriteLine("Total Grade: " +gradingdata.Totalgrade);
 
                 Console.WriteLine(" ");
             }

@@ -24,7 +24,10 @@ namespace DataLayer
         {
             return detabes.GetGrades();
         }
-
+        public Grade GetGradesByName(string Name)
+        {
+            return detabes.GetGradeByName(Name);
+        }
         public List<Grade> GetNames()
         {
             return detabes.GetNames();
@@ -53,10 +56,21 @@ namespace DataLayer
             detabes.InsertAttendanceGrade(ATTENDANCE);
         }
 
-        public Grade GetGradesByName(string Name)
-        {
-            return detabes.GetGradeByName(Name);
+        public void InsertExamGrade(Grade EXAM)
+        { 
+        detabes.InsertExamGrade(EXAM);
         }
+
+        public void InsertMidtermGrade(Grade MIDTERM)
+        {
+            detabes.InsertMidtermGrade(MIDTERM);
+        }
+
+        public void InsertFinalGrade(Grade FINAL)
+        {
+            detabes.InsertFinalGrade(FINAL);
+        }
+
 
     }
 }

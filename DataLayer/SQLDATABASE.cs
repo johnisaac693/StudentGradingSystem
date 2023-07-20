@@ -13,8 +13,8 @@ namespace DataLayer
     public class SQLDATABASE
     {
 
-        static string ConnectString = "Data Source=localhost; Initial Catalog = GradingSystem; Integrated Security = True;";
-        
+        //static string ConnectString = "Data Source=localhost; Initial Catalog = GradingSystem; Integrated Security = True;";
+        static string ConnectString = "Data Source=LAPTOP-D3L5LPUQ\\SQLEXPRESS01; Initial Catalog = GradingSystem; Integrated Security = True;";
 
         static SqlConnection sqlconnection;
 
@@ -44,6 +44,90 @@ namespace DataLayer
 
             
 
+        }
+        public List<Grade> GetGrades()
+        {
+
+            var selectStatement = "SELECT * FROM Grade";
+            SqlCommand selectcommand = new SqlCommand(selectStatement, sqlconnection);
+            sqlconnection.Open();
+
+            SqlDataReader reader = selectcommand.ExecuteReader();
+
+            var Grades = new List<Grade>();
+
+            while (reader.Read())
+            {
+                Grades.Add(new Grade()
+                {
+                    Studentname = reader["Name"].ToString(),
+                    Seatworkgrade = Convert.ToDouble(reader["SeatWork"].ToString()),
+                    Quizgrade = Convert.ToDouble(reader["Quiz"].ToString()),
+                    Recitgrade = Convert.ToDouble(reader["Recitation"].ToString()),
+                    Attendancegrade = Convert.ToDouble(reader["Attendance"].ToString()),
+                    Projectgrade = Convert.ToDouble(reader["Project"].ToString()),
+                    Examgrade = Convert.ToDouble(reader["Exam"].ToString()),
+                    Midtermgrade = Convert.ToDouble(reader["Midterm"].ToString()),
+                    Finalgrade = Convert.ToDouble(reader["Final"].ToString()),
+                    Totalgrade = Convert.ToDouble(reader["TotalGrade"].ToString()),
+
+                });
+            }
+            sqlconnection.Close(); return Grades;
+        }
+        public List<Grade> GetNames()
+        {
+
+            var selectStatement = "SELECT * FROM Grade";
+            SqlCommand selectcommand = new SqlCommand(selectStatement, sqlconnection);
+            sqlconnection.Open();
+
+            SqlDataReader reader = selectcommand.ExecuteReader();
+
+            var Names = new List<Grade>();
+
+            while (reader.Read())
+            {
+                Names.Add(new Grade()
+                {
+                    Studentname = reader["Name"].ToString(),
+
+                    
+
+                });
+            }
+            sqlconnection.Close(); return Names;
+        }
+        public Grade GetGradeByName(string name)
+        {
+            var selectStatement = "SELECT * FROM Grade WHERE Name = @Name";
+            SqlCommand selectcommand = new SqlCommand(selectStatement, sqlconnection);
+            selectcommand.Parameters.AddWithValue("@Name", name);
+            sqlconnection.Open();
+
+            SqlDataReader reader = selectcommand.ExecuteReader();
+
+            Grade grade = null;
+
+            while (reader.Read())
+            {
+                grade = new Grade() 
+                {
+                    Studentname = reader["Name"].ToString(),
+                    Seatworkgrade = Convert.ToDouble(reader["SeatWork"].ToString()),
+                    Quizgrade = Convert.ToDouble(reader["Quiz"].ToString()),
+                    Recitgrade = Convert.ToDouble(reader["Recitation"].ToString()),
+                    Attendancegrade = Convert.ToDouble(reader["Attendance"].ToString()),
+                    Projectgrade = Convert.ToDouble(reader["Project"].ToString()),
+                    Examgrade = Convert.ToDouble(reader["Exam"].ToString()),
+                    Midtermgrade = Convert.ToDouble(reader["Midterm"].ToString()),
+                    Finalgrade = Convert.ToDouble(reader["Final"].ToString()),
+                    Totalgrade = Convert.ToDouble(reader["TotalGrade"].ToString()),
+
+                };
+            }
+            sqlconnection.Close(); 
+            return grade;
         }
 
         //SeatWork insert in DB
@@ -121,92 +205,54 @@ namespace DataLayer
             sqlconnection.Close();
         }
 
-        public List<Grade> GetGrades()
+        public void InsertExamGrade(Grade EXAM)
         {
-
-            var selectStatement = "SELECT * FROM Grade";
-            SqlCommand selectcommand = new SqlCommand(selectStatement, sqlconnection);
             sqlconnection.Open();
+            var updateStatement = "UPDATE GRADE SET Exam = @Exam WHERE Name = @Name";
 
-            SqlDataReader reader = selectcommand.ExecuteReader();
+            SqlCommand updateCommand = new SqlCommand(updateStatement, sqlconnection);
 
-            var Grades = new List<Grade>();
+            updateCommand.Parameters.AddWithValue("@Exam", EXAM.Examgrade);
+            updateCommand.Parameters.AddWithValue("@Name", EXAM.Studentname);
 
-            while (reader.Read())
-            {
-                Grades.Add(new Grade()
-                {
-                    Studentname = reader["Name"].ToString(),
-                    Seatworkgrade = Convert.ToDouble(reader["SeatWork"].ToString()),
-                    Quizgrade = Convert.ToDouble(reader["Quiz"].ToString()),
-                    Recitgrade = Convert.ToDouble(reader["Recitation"].ToString()),
-                    Attendancegrade = Convert.ToDouble(reader["Attendance"].ToString()),
-                    Projectgrade = Convert.ToDouble(reader["Project"].ToString()),
-                    Examgrade = Convert.ToDouble(reader["Exam"].ToString()),
-                    Midtermgrade = Convert.ToDouble(reader["Midterm"].ToString()),
-                    Finalgrade = Convert.ToDouble(reader["Final"].ToString()),
-                    Totalgrade = Convert.ToDouble(reader["TotalGrade"].ToString()),
+            updateCommand.ExecuteNonQuery();
 
-                });
-            }
-            sqlconnection.Close(); return Grades;
+            sqlconnection.Close();
         }
 
-        public List<Grade> GetNames()
+        public void InsertMidtermGrade(Grade MIDTERM)
         {
-
-            var selectStatement = "SELECT * FROM Grade";
-            SqlCommand selectcommand = new SqlCommand(selectStatement, sqlconnection);
             sqlconnection.Open();
+            var updateStatement = "UPDATE GRADE SET Midterm = @Midterm WHERE Name = @Name";
 
-            SqlDataReader reader = selectcommand.ExecuteReader();
+            SqlCommand updateCommand = new SqlCommand(updateStatement, sqlconnection);
 
-            var Names = new List<Grade>();
+            updateCommand.Parameters.AddWithValue("@Midterm", MIDTERM.Midtermgrade);
+            updateCommand.Parameters.AddWithValue("@Name", MIDTERM.Studentname);
 
-            while (reader.Read())
-            {
-                Names.Add(new Grade()
-                {
-                    Studentname = reader["Name"].ToString(),
+            updateCommand.ExecuteNonQuery();
 
-                    
-
-                });
-            }
-            sqlconnection.Close(); return Names;
+            sqlconnection.Close();
         }
 
-         public Grade GetGradeByName(string name)
+        public void InsertFinalGrade(Grade FINAL)
         {
-            var selectStatement = "SELECT * FROM Grade WHERE Name = @Name";
-            SqlCommand selectcommand = new SqlCommand(selectStatement, sqlconnection);
-            selectcommand.Parameters.AddWithValue("@Name", name);
             sqlconnection.Open();
+            var updateStatement = "UPDATE GRADE SET Final = @Final WHERE Name = @Name";
 
-            SqlDataReader reader = selectcommand.ExecuteReader();
+            SqlCommand updateCommand = new SqlCommand(updateStatement, sqlconnection);
 
-            Grade grade = null;
+            updateCommand.Parameters.AddWithValue("@Final", FINAL.Finalgrade);
+            updateCommand.Parameters.AddWithValue("@Name", FINAL.Studentname);
 
-            while (reader.Read())
-            {
-                grade = new Grade() 
-                {
-                    Studentname = reader["Name"].ToString(),
-                    Seatworkgrade = Convert.ToDouble(reader["SeatWork"].ToString()),
-                    Quizgrade = Convert.ToDouble(reader["Quiz"].ToString()),
-                    Recitgrade = Convert.ToDouble(reader["Recitation"].ToString()),
-                    Attendancegrade = Convert.ToDouble(reader["Attendance"].ToString()),
-                    Projectgrade = Convert.ToDouble(reader["Project"].ToString()),
-                    Examgrade = Convert.ToDouble(reader["Exam"].ToString()),
-                    Midtermgrade = Convert.ToDouble(reader["Midterm"].ToString()),
-                    Finalgrade = Convert.ToDouble(reader["Final"].ToString()),
-                    Totalgrade = Convert.ToDouble(reader["TotalGrade"].ToString()),
+            updateCommand.ExecuteNonQuery();
 
-                };
-            }
-            sqlconnection.Close(); 
-            return grade;
+            sqlconnection.Close();
         }
+
+
+
+
 
 
     }

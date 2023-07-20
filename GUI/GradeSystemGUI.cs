@@ -3,6 +3,7 @@ using DataLayer;
 using Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace GUI
        
         GradesDataService gradedb = new GradesDataService();
         public static readonly List<string> GradingOptions = new()
-     {"Seatworks - Press 1", "Quizzes - Press 2", "Recitations - Press 3", "Midterm - 4", "Finals - 5", "Project - 6", "Attendance - 7", "Total Grade - 8", "Back - 0"};
+     {"Seatworks - Press 1", "Quizzes - Press 2", "Recitations - Press 3", "Attendance - 4", "Exams - 5", "Project - 6", "Midterm - 7","Final - 8", "Total Grade - 9", "Back - 0"};
 
         public void SpecialStudentGradeGUI(string studentName)
         {
@@ -38,19 +39,20 @@ namespace GUI
                         HandleRecitations(studentName, gradeselectmenu);
                         break;
                     case 4:
-                        HandlePerformanceTasks();
+                         HandleAttendance(studentName, gradeselectmenu);
                         break;
                     case 5:
-                        HandleMidterms();
+                         HandleExams(studentName, gradeselectmenu);
                         break;
-                    case 6:
-                        HandleFinals();
-                        break;
-                    case 7:
+                    case 6: 
                         HandleProject(studentName, gradeselectmenu);
                         break;
+    
+                    case 7:
+                        HandleMidterms(studentName, gradeselectmenu);
+                        break;
                     case 8:
-                        HandleAttendance(studentName, gradeselectmenu);
+                       HandleFinals(studentName, gradeselectmenu);
                         break;
                     default:
                         gradeselectmenu = 0;
@@ -95,21 +97,25 @@ namespace GUI
             Console.WriteLine();
         }
 
-        private void HandleMidterms()
-        {
-            Console.WriteLine("Midterms");
-            Console.WriteLine();
-        }
-
-        private void HandleFinals()
+        private void HandleFinals(string studentName, int select)
         {
             Console.WriteLine("Finals");
+            Console.WriteLine("Tabulating Final Grade");
+            TabulateGrade(studentName, select);
             Console.WriteLine();
         }
+        private void HandleMidterms(string studentName, int Select)
+        {
+            Console.WriteLine("Tabulating Midterm Grade");
+            TabulateGrade(studentName, Select);
 
-        private void HandleExams()
+
+        }
+        private void HandleExams(string studentName, int select)
         {
             Console.WriteLine("Exams");
+            double score = ExamGrade();
+            AddGrade(score, studentName, select);
         }
 
         private void HandleProject(string studentName, int select) 
@@ -139,6 +145,8 @@ namespace GUI
 
             Console.WriteLine();
         }
+
+       
 
 
         public void ViewGradingOptions() // View Grading Options
@@ -292,8 +300,6 @@ namespace GUI
 
         public void AddGrade(double grade, string studentName, int select)
         {
-            
-            {
                 Grade gradedata = gradedb.GetGradesByName(studentName);
 
                 if (gradedata != null)
@@ -316,9 +322,15 @@ namespace GUI
                             break;
 
                             case 4:
+                            gradedata.Attendancegrade = grade;
+                            gradedb.InsertAttendanceGrade(gradedata);
+                            Console.WriteLine("Your Attendance Grade is: " + gradedata.Attendancegrade);
                             break;
 
                             case 5:
+                            gradedata.Examgrade = grade;
+                            gradedb.InsertExamGrade(gradedata);
+                            Console.WriteLine("Your Exam Grade is: " + gradedata.Examgrade);
                             break;
 
                             case 6:
@@ -326,14 +338,38 @@ namespace GUI
                             gradedb.InsertProjectGrade(gradedata);
                             break;
 
-                            case 7:
-                            gradedata.Attendancegrade = grade;
-                            gradedb.InsertAttendanceGrade(gradedata);
-                            Console.WriteLine("Your Attendance Grade is: " +gradedata.Attendancegrade);
+                        default:
+                            
                             break;
 
-                            case 8:
-                            
+                    }
+                }
+        }
+        
+        public void TabulateGrade(string studentName, int select)
+        {
+
+            {
+                Grade gradedata = gradedb.GetGradesByName(studentName);
+
+                if (gradedata != null)
+                {
+                    switch (select)
+                    {
+                        case 7:
+                            gradedata.Midtermgrade = GradeFormulas.TabulateGrade(gradedata.Seatworkgrade, gradedata.Quizgrade, gradedata.Recitgrade, gradedata.Attendancegrade, gradedata.Projectgrade, gradedata.Examgrade);
+                            gradedb.InsertMidtermGrade(gradedata);
+                            Console.WriteLine("The Midterm Grade Is: " +gradedata.Midtermgrade);
+                            break;
+
+                        case 8:
+                            gradedata.Finalgrade = GradeFormulas.TabulateGrade(gradedata.Seatworkgrade, gradedata.Quizgrade, gradedata.Recitgrade, gradedata.Attendancegrade, gradedata.Projectgrade, gradedata.Examgrade);
+                            gradedb.InsertFinalGrade(gradedata);
+                            Console.WriteLine("The Final Grade Is: " + gradedata.Finalgrade);
+                            break;
+
+
+                        default:
                             break;
 
 
@@ -345,9 +381,8 @@ namespace GUI
 
             }
         }
-        
 
-       
+
 
         public static double ExamGrade()
         {
