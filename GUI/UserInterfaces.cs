@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using BusinessLayer;
 using DataLayer;
 using Models;
@@ -7,6 +8,11 @@ namespace GUI
 {
     public class UserInterfaces
     {
+
+        GradesDataService gradedb = new GradesDataService();
+        GradeSystemGUI gradegui = new GradeSystemGUI();
+        
+
         //LISTS
        public static readonly List<string> MenuOptions = new()
      {"Create New Grade Info - Press 1", "View Grades Inputted - 2", "Input Grades - Press 3", "Exit - 0"};
@@ -18,7 +24,7 @@ namespace GUI
 
         //MENU METHODS
 
-        public static void MainMenu()
+        public void MainMenu()
         {
             Console.WriteLine("Welcome to the Grading System");
             Console.WriteLine("Here are your options:");
@@ -32,7 +38,6 @@ namespace GUI
                     case 1:
                         Console.WriteLine();
                         CreateGrade();
-                        
                         break;
 
                     case 2:
@@ -46,8 +51,15 @@ namespace GUI
                         Console.WriteLine();
                         Console.WriteLine("Input grades");
                         string studentchoice = ChooseStudent();
-                        GradeSystemGUI.SpecialStudentGradeGUI(studentchoice);
-                        
+                        if (IsStudentExisting(studentchoice))
+                        {
+                            gradegui.SpecialStudentGradeGUI(studentchoice);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Student does not exist");
+                        }
+
                         break;
 
                     default:
@@ -75,55 +87,73 @@ namespace GUI
 
 
         //MENU FUNCTIONS
-        public static void CreateGrade()
+        public void CreateGrade()
         {
-            try
-            {
+            
+           
                 Console.WriteLine();
                 Console.Write("Enter Name of Student to Grade: ");
                 string studname = Console.ReadLine()?.Trim().ToUpper();
 
-                Grade grade = new Grade(studname);
-                GradeMemory.Gradelist.Add(grade);
+                Grade grade = new Grade();
+                grade.Studentname = studname;
+                gradedb.CreateGrade(grade);
 
-                Console.WriteLine();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("An Invalid Input was detected, returning to the main menu");
-                GradeMemory.Gradelist.RemoveAt(GradeMemory.Gradelist.Count - 1);
-            }
+
+            
         }
 
-        public static void ViewGrade()
+        public void ViewGrade()
         {
-            foreach (Grade grades in GradeMemory.Gradelist)
-            {
-                Console.WriteLine("Student Name: " + grades.Studentname);
-                Console.WriteLine("Seatwork Grade: " +grades.Seatworkgrade);
-                Console.WriteLine("Quiz Grade: " + grades.Quizgrade);
-                Console.WriteLine("Project Grade: " + grades.Projectgrade);
-                Console.WriteLine("Recitation Grade: " + grades.Recitgrade);
-                Console.WriteLine("Exam Grade: " + grades.Examgrade);
-                Console.WriteLine("Attendance Grade: " +grades.Attendancegrade);
 
+            var grades = gradedb.getGrades();
+            if (grades.Count == 0)
+            {
+                Console.WriteLine("This page is empty. Create a grade data to fill this up.");
             }
-            Console.WriteLine("");
+            else
+            {
+                foreach (var gradingdata in grades)
+            {
+                Console.WriteLine("Student Name: " + gradingdata.Studentname);
+                Console.WriteLine("Seatwork Grade: " + gradingdata.Seatworkgrade);
+                Console.WriteLine("Quiz Grade: " + gradingdata.Quizgrade);
+                Console.WriteLine("Project Grade: " + gradingdata.Projectgrade);
+                Console.WriteLine("Recitation Grade: " + gradingdata.Recitgrade);
+                Console.WriteLine("Exam Grade: " + gradingdata.Examgrade);
+                Console.WriteLine("Attendance Grade: " + gradingdata.Attendancegrade);
+                Console.WriteLine("Midterm Grade: " + gradingdata.Midtermgrade);
+                Console.WriteLine("Final Grade: " + gradingdata.Finalgrade);
+                Console.WriteLine("Total Grade: " + gradingdata.Totalgrade);
+
+                Console.WriteLine(" ");
+            }
+            }
+            Console.WriteLine(" ");
         }
 
 
-        public static string ChooseStudent()
+        public string ChooseStudent()
         {
 
-            Console.WriteLine("Choose which student whose grade you choose to modify");
+            Console.WriteLine("Enter the name of the student whose grade you wish to modify: ");
 
-            foreach (Grade grade in GradeMemory.Gradelist)
+            var names = gradedb.GetNames();
+            if (names.Count == 0)
             {
-                Console.WriteLine(grade.Studentname);
+                Console.WriteLine("This page is empty. Create a grade data to continue!");
+                return null;
             }
-            Console.Write("Enter name: ");
-            string Student = Console.ReadLine()?.Trim().ToUpper();
-            return Student;
+            else
+            {
+                foreach (var name in names)
+                {
+                    Console.WriteLine(name.Studentname);
+                }
+                Console.Write("Enter name: ");
+                string Student = Console.ReadLine()?.Trim().ToUpper();
+                return Student;
+            }
         }
 
 
@@ -144,9 +174,23 @@ namespace GUI
                 }
 
         }
-       
 
-       
+
+        public bool IsStudentExisting(string studentexist)
+        {
+            var nameexist = gradedb.getGrades();
+            foreach (var name in nameexist)
+            {
+                if (name.Studentname.Contains(studentexist))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        } //For checks
+
+
 
     }
 }   
