@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using BusinessLayer;
 using DataLayer;
 using Models;
@@ -50,8 +51,15 @@ namespace GUI
                         Console.WriteLine();
                         Console.WriteLine("Input grades");
                         string studentchoice = ChooseStudent();
-                        gradegui.SpecialStudentGradeGUI(studentchoice);
-                        
+                        if (IsStudentExisting(studentchoice))
+                        {
+                            gradegui.SpecialStudentGradeGUI(studentchoice);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Student does not exist");
+                        }
+
                         break;
 
                     default:
@@ -97,9 +105,15 @@ namespace GUI
 
         public void ViewGrade()
         {
-          
+
             var grades = gradedb.getGrades();
-            foreach (var gradingdata in grades)
+            if (grades.Count == 0)
+            {
+                Console.WriteLine("This page is empty. Create a grade data to fill this up.");
+            }
+            else
+            {
+                foreach (var gradingdata in grades)
             {
                 Console.WriteLine("Student Name: " + gradingdata.Studentname);
                 Console.WriteLine("Seatwork Grade: " + gradingdata.Seatworkgrade);
@@ -108,11 +122,12 @@ namespace GUI
                 Console.WriteLine("Recitation Grade: " + gradingdata.Recitgrade);
                 Console.WriteLine("Exam Grade: " + gradingdata.Examgrade);
                 Console.WriteLine("Attendance Grade: " + gradingdata.Attendancegrade);
-                Console.WriteLine("Midterm Grade: " +gradingdata.Midtermgrade);
-                Console.WriteLine("Final Grade: " +gradingdata.Finalgrade);
-                Console.WriteLine("Total Grade: " +gradingdata.Totalgrade);
+                Console.WriteLine("Midterm Grade: " + gradingdata.Midtermgrade);
+                Console.WriteLine("Final Grade: " + gradingdata.Finalgrade);
+                Console.WriteLine("Total Grade: " + gradingdata.Totalgrade);
 
                 Console.WriteLine(" ");
+            }
             }
             Console.WriteLine(" ");
         }
@@ -124,13 +139,21 @@ namespace GUI
             Console.WriteLine("Enter the name of the student whose grade you wish to modify: ");
 
             var names = gradedb.GetNames();
-            foreach (var name in names)
+            if (names.Count == 0)
             {
-                Console.WriteLine(name.Studentname);
+                Console.WriteLine("This page is empty. Create a grade data to continue!");
+                return null;
             }
-            Console.Write("Enter name: ");
-            string Student = Console.ReadLine()?.Trim().ToUpper();
-            return Student;
+            else
+            {
+                foreach (var name in names)
+                {
+                    Console.WriteLine(name.Studentname);
+                }
+                Console.Write("Enter name: ");
+                string Student = Console.ReadLine()?.Trim().ToUpper();
+                return Student;
+            }
         }
 
 
@@ -151,9 +174,21 @@ namespace GUI
                 }
 
         }
-       
 
-       
+
+        public bool IsStudentExisting(string studentexist)
+        {
+            var nameexist = gradedb.getGrades();
+            foreach (var name in nameexist)
+            {
+                if (name.Studentname.Contains(studentexist))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
     }
 }   
