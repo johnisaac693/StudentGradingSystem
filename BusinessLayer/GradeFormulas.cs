@@ -36,6 +36,13 @@ namespace BusinessLayer
 
         }
 
+
+        public static double TotalGrade(double MidtermGrade, double FinalGrade)
+        { 
+         double totalgrade = (MidtermGrade * 0.5) + (FinalGrade * 0.5);
+
+            return totalgrade;
+        }
     }
 
     

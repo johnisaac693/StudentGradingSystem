@@ -253,7 +253,7 @@ namespace DataLayer
         public void InsertTotalGrade(Grade TOTAL)
         {
             sqlconnection.Open();
-            var updateStatement = "UPDATE GRADE SET Total = @Total WHERE Name = @Name";
+            var updateStatement = "UPDATE GRADE SET TotalGrade = @Total WHERE Name = @Name";
 
             SqlCommand updateCommand = new SqlCommand(updateStatement, sqlconnection);
 

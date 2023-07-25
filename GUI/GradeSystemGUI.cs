@@ -54,6 +54,9 @@ namespace GUI
                     case 8:
                        HandleFinals(studentName, gradeselectmenu);
                         break;
+                        case 9:
+                            HandleTotalGrades(studentName, gradeselectmenu);
+                        break;
                     default:
                         gradeselectmenu = 0;
                         break;
@@ -100,13 +103,13 @@ namespace GUI
         private void HandleFinals(string studentName, int select)
         {
             Console.WriteLine("Finals");
-            Console.WriteLine("Tabulating Final Grade");
+            Console.WriteLine("Tabulating Final Grade: Class Standing = 70%, Exams = 30%");
             TabulateGrade(studentName, select);
             Console.WriteLine();
         }
         private void HandleMidterms(string studentName, int Select)
         {
-            Console.WriteLine("Tabulating Midterm Grade");
+            Console.WriteLine("Tabulating Midterm Grade: Class Standing = 70%, Exams = 30%");
             TabulateGrade(studentName, Select);
 
 
@@ -137,11 +140,11 @@ namespace GUI
            Console.WriteLine();
         }
 
-        private void HandleTotalGrade(string studentName, int select)
+        private void HandleTotalGrades(string studentName, int select)
         {
             Console.WriteLine("Total Grade");
-
-
+            Console.WriteLine("Computing Total Grade: Midterm and Finals are both 50%");
+            TabulateGrade(studentName, select);
 
             Console.WriteLine();
         }
@@ -366,6 +369,12 @@ namespace GUI
                             gradedata.Finalgrade = GradeFormulas.TabulateGrade(gradedata.Seatworkgrade, gradedata.Quizgrade, gradedata.Recitgrade, gradedata.Attendancegrade, gradedata.Projectgrade, gradedata.Examgrade);
                             gradedb.InsertFinalGrade(gradedata);
                             Console.WriteLine("The Final Grade Is: " + gradedata.Finalgrade);
+                            break;
+
+                            case 9:
+                            gradedata.Totalgrade = GradeFormulas.TotalGrade(gradedata.Midtermgrade, gradedata.Finalgrade);
+                            gradedb.InsertTotalGrade(gradedata);
+                            Console.WriteLine("The Final Grade Is: " + gradedata.Totalgrade);
                             break;
 
 
