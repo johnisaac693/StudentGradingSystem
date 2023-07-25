@@ -250,6 +250,21 @@ namespace DataLayer
             sqlconnection.Close();
         }
 
+        public void InsertTotalGrade(Grade TOTAL)
+        {
+            sqlconnection.Open();
+            var updateStatement = "UPDATE GRADE SET Total = @Total WHERE Name = @Name";
+
+            SqlCommand updateCommand = new SqlCommand(updateStatement, sqlconnection);
+
+            updateCommand.Parameters.AddWithValue("@Total", TOTAL.Totalgrade);
+            updateCommand.Parameters.AddWithValue("@Name", TOTAL.Studentname);
+
+            updateCommand.ExecuteNonQuery();
+
+            sqlconnection.Close();
+        }
+
 
 
 

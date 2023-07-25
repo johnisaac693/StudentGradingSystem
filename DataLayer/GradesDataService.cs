@@ -71,6 +71,9 @@ namespace DataLayer
             detabes.InsertFinalGrade(FINAL);
         }
 
-
+        public void InsertTotalGrade(Grade TOTAL)
+        { 
+        detabes.InsertTotalGrade(TOTAL);
+        }
     }
 }
