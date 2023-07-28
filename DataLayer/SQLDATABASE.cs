@@ -265,6 +265,20 @@ namespace DataLayer
             sqlconnection.Close();
         }
 
+        public void DeleteGrade(Grade DELETE) 
+        {
+            sqlconnection.Open();
+            var deleteStatement = "DELETE FROM GRADE WHERE Name = @Name";
+
+            SqlCommand deleteCommand = new SqlCommand(deleteStatement, sqlconnection);
+
+            deleteCommand.Parameters.AddWithValue("@Name", DELETE.Studentname);
+
+
+            deleteCommand.ExecuteNonQuery();
+
+            sqlconnection.Close();
+        }
 
 
 
