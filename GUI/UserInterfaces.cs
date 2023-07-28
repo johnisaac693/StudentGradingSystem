@@ -15,7 +15,7 @@ namespace GUI
 
         //LISTS
        public static readonly List<string> MenuOptions = new()
-     {"Create New Grade Info - Press 1", "View Grades Inputted - 2", "Input Grades - Press 3", "Exit - 0"};
+     {"Create New Grade Info - Press 1", "View Grades Inputted - 2", "Input Grades - Press 3", "4 - Delete Grade Data",  "Exit - 0"};
 
        
 
@@ -59,6 +59,22 @@ namespace GUI
                         {
                             Console.WriteLine("Student does not exist");
                         }
+                        break;
+                    case 4:
+
+                        Console.WriteLine();
+                        Console.WriteLine("Delete a Student");
+                        string studentchoicetodelete = ChooseStudent();
+                        if (IsStudentExisting(studentchoicetodelete))
+                        {
+                            var GradeDelete = gradedb.GetGradesByName(studentchoicetodelete);
+                            gradedb.DeleteGrade(GradeDelete);
+                            Console.WriteLine("Student Deleted\n");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Student does not exist\n");
+                        }
 
                         break;
 
@@ -95,12 +111,19 @@ namespace GUI
                 Console.Write("Enter Name of Student to Grade: ");
                 string studname = Console.ReadLine()?.Trim().ToUpper();
 
+            if (IsStudentExisting(studname))
+            {
+                Console.WriteLine("This student already exists \n");
+            }
+            else
+            {
                 Grade grade = new Grade();
                 grade.Studentname = studname;
                 gradedb.CreateGrade(grade);
+            }
 
 
-            
+
         }
 
         public void ViewGrade()
@@ -109,7 +132,7 @@ namespace GUI
             var grades = gradedb.getGrades();
             if (grades.Count == 0)
             {
-                Console.WriteLine("This page is empty. Create a grade data to fill this up.");
+                Console.WriteLine("This page is empty. Create a grade data to fill this up. \n");
             }
             else
             {
@@ -141,7 +164,8 @@ namespace GUI
             var names = gradedb.GetNames();
             if (names.Count == 0)
             {
-                Console.WriteLine("This page is empty. Create a grade data to continue!");
+                Console.WriteLine("This page is empty. Create a grade data to continue! \n");
+
                 return null;
             }
             else
@@ -176,12 +200,13 @@ namespace GUI
         }
 
 
+        //MENU FUNCTION METHODS
         public bool IsStudentExisting(string studentexist)
         {
             var nameexist = gradedb.getGrades();
             foreach (var name in nameexist)
             {
-                if (name.Studentname.Contains(studentexist))
+                if (name.Studentname.Equals(studentexist))
                 {
                     return true;
                 }

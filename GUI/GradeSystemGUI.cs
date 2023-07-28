@@ -69,36 +69,55 @@ namespace GUI
 
         private void HandleSeatworks(string studentName, int select)
         {
-            Console.WriteLine("Seatworks");
-            int itemnos = NumberofItemsChecker();
-            double score = DynamicOrStatic() ? ConstantItemScore(itemnos) : DynamicItemScore(itemnos);
-            AddGrade(score, studentName, select);
-            Console.WriteLine("");
+            try
+            {
+                Console.WriteLine("Seatworks");
+                int itemnos = NumberofItemsChecker();
+                double score = DynamicOrStatic() ? ConstantItemScore(itemnos) : DynamicItemScore(itemnos);
+                AddGrade(score, studentName, select);
+                Console.WriteLine("");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid Input Detected. Returning to menu");
+            }
         }
 
         private void HandleQuizzes(string studentName, int select)
         {
-            Console.WriteLine("Quizzes");
-            int itemnos = NumberofItemsChecker();
-            double score = DynamicOrStatic() ? ConstantItemScore(itemnos) : DynamicItemScore(itemnos);
-            AddGrade(score, studentName, select);
-            Console.WriteLine("");
+            try
+            {
+                Console.WriteLine("Quizzes");
+                int itemnos = NumberofItemsChecker();
+                double score = DynamicOrStatic() ? ConstantItemScore(itemnos) : DynamicItemScore(itemnos);
+                AddGrade(score, studentName, select);
+                Console.WriteLine("");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid Input Detected. Returning to menu");
+            }
         }
 
         private void HandleRecitations(string studentName, int select)
         {
-            Console.WriteLine("Recitations");
-            double score = RecitationCompute();
-            AddGrade(score, studentName, select);
 
-            Console.WriteLine();
+            try
+            {
+                Console.WriteLine("Recitations");
+                double score = RecitationCompute();
+                AddGrade(score, studentName, select);
+
+                Console.WriteLine();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("An error was detected!");
+            }
+           
         }
 
-        private void HandlePerformanceTasks()
-        {
-            Console.WriteLine("Performance Tasks");
-            Console.WriteLine();
-        }
+       
 
         private void HandleFinals(string studentName, int select)
         {
@@ -116,9 +135,16 @@ namespace GUI
         }
         private void HandleExams(string studentName, int select)
         {
-            Console.WriteLine("Exams");
-            double score = ExamGrade();
-            AddGrade(score, studentName, select);
+            try
+            {
+                Console.WriteLine("Exams");
+                double score = ExamGrade();
+                AddGrade(score, studentName, select);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid input detected! Returning to menu!");
+            }
         }
 
         private void HandleProject(string studentName, int select) 
@@ -132,21 +158,37 @@ namespace GUI
 
         private void HandleAttendance(string studentName, int select)
         {
-            Console.WriteLine("Attendance");
-            double daystotal = NoOfDays();
-            double daysattended = DaysAttended();
-            double score = GradeFormulas.AttendanceCompute(daysattended, daystotal);
-            AddGrade(score, studentName, select);
-           Console.WriteLine();
+          
+                Console.WriteLine("Attendance");
+                double daystotal = NoOfDays();
+                double daysattended = DaysAttended();
+                double score = GradeFormulas.AttendanceCompute(daysattended, daystotal);
+
+                if (daysattended > daystotal)
+                {
+                    throw new ArgumentException("Days attended cannot be higher than total days in term!");
+                }
+
+                AddGrade(score, studentName, select);
+                Console.WriteLine();
+           
         }
 
         private void HandleTotalGrades(string studentName, int select)
         {
-            Console.WriteLine("Total Grade");
-            Console.WriteLine("Computing Total Grade: Midterm and Finals are both 50%");
-            TabulateGrade(studentName, select);
+            try
+            {
 
-            Console.WriteLine();
+                Console.WriteLine("Total Grade");
+                Console.WriteLine("Computing Total Grade: Midterm and Finals are both 50%");
+                TabulateGrade(studentName, select);
+
+                Console.WriteLine();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Invalid grade data or incomplete grades");
+            }
         }
 
        
@@ -211,6 +253,12 @@ namespace GUI
             double reciGrade;
             Console.Write("What is the student's recitation grade? (out of 100)?: ");
             reciGrade = Convert.ToDouble(Console.ReadLine());
+
+            if (reciGrade > 100)
+            {
+                throw new ArgumentException("Grade cannot be higher than 100!");
+            }
+
             return (double)reciGrade;
         }
 
@@ -219,6 +267,12 @@ namespace GUI
             double projectGrade;
             Console.Write("What is the student's projet grade? (out of 100)?: ");
             projectGrade = Convert.ToDouble(Console.ReadLine());
+
+            if (projectGrade > 100)
+            {
+                Console.WriteLine("Score cannot be higher than 100!");
+            }
+
             return (double)projectGrade;
         }
 
@@ -283,20 +337,35 @@ namespace GUI
         }
         public static bool DynamicOrStatic()
         {
-            Console.Write("Do all your works share the same item limit?: ");
-            string yesorno = Console.ReadLine()?.Trim().ToLower();
+            while (true)
+            {
+                Console.Write("Do all your works share the same item limit? (yes/no): ");
+                string yesorno = Console.ReadLine()?.Trim().ToLower();
 
-            bool result = (yesorno == "yes");
-
-            return result;
-
+                if (yesorno == "yes")
+                {
+                    return true;
+                }
+                else if (yesorno == "no")
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter 'yes' or 'no'.");
+                   
+                }
+            }
         }
         public static int NumberofItemsChecker()
         {
-            Console.Write("Enter how many works you need: ");
-            int numberofworks = Convert.ToInt32(Console.ReadLine());
+           
+                Console.Write("Enter how many works you need: ");
+                string input = Console.ReadLine();
 
-            return numberofworks;
+                int numberofworks = Convert.ToInt32(input);
+                return numberofworks;
+           
         }
 
 
@@ -363,6 +432,9 @@ namespace GUI
                             gradedata.Midtermgrade = GradeFormulas.TabulateGrade(gradedata.Seatworkgrade, gradedata.Quizgrade, gradedata.Recitgrade, gradedata.Attendancegrade, gradedata.Projectgrade, gradedata.Examgrade);
                             gradedb.InsertMidtermGrade(gradedata);
                             Console.WriteLine("The Midterm Grade Is: " +gradedata.Midtermgrade);
+
+
+
                             break;
 
                         case 8:

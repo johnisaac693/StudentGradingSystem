@@ -75,5 +75,10 @@ namespace DataLayer
         { 
         detabes.InsertTotalGrade(TOTAL);
         }
+
+        public void DeleteGrade(Grade DELETE)
+        { 
+        detabes.DeleteGrade(DELETE);
+        }
     }
 }
