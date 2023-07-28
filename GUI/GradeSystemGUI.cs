@@ -112,7 +112,7 @@ namespace GUI
             }
             catch (Exception)
             {
-                Console.WriteLine("An error was detected!");
+                Console.WriteLine("An invalid input, or number was detected!");
             }
            
         }
@@ -149,16 +149,26 @@ namespace GUI
 
         private void HandleProject(string studentName, int select) 
         {
-            Console.WriteLine("Project");
-            double score = ProjectCompute();
-            AddGrade(score, studentName, select);
+            try
+            {
+                Console.WriteLine("Project");
+                double score = ProjectCompute();
+                AddGrade(score, studentName, select);
 
-            Console.WriteLine();
+                Console.WriteLine();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("An invalid input, or number was detected");
+
+            }
         }
 
         private void HandleAttendance(string studentName, int select)
         {
-          
+
+            try
+            {
                 Console.WriteLine("Attendance");
                 double daystotal = NoOfDays();
                 double daysattended = DaysAttended();
@@ -171,6 +181,11 @@ namespace GUI
 
                 AddGrade(score, studentName, select);
                 Console.WriteLine();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("An invalid input or formula was detected");
+            }
            
         }
 
@@ -270,7 +285,7 @@ namespace GUI
 
             if (projectGrade > 100)
             {
-                Console.WriteLine("Score cannot be higher than 100!");
+                throw new ArgumentException("Score cannot be higher than 100!");
             }
 
             return (double)projectGrade;
@@ -467,8 +482,7 @@ namespace GUI
 
         public static double ExamGrade()
         {
-            try
-            {
+           
                 int Items;
                 int Score;
                 Console.Write("How many items were the exam?: ");
@@ -481,7 +495,7 @@ namespace GUI
                     {
                     throw new ArgumentException("Score cannot be higher than the number of items!");
 
-                }
+                    }
 
                 
 
@@ -495,12 +509,7 @@ namespace GUI
 
                 //
                 //Grades.Add(grade);
-            }
-            catch
-            {
-                Console.WriteLine("An Invalid Input was Detected");
-                return -1;
-            }
+          
 
 
         }

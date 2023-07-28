@@ -141,10 +141,10 @@ namespace GUI
                 Console.WriteLine("Student Name: " + gradingdata.Studentname);
                 Console.WriteLine("Seatwork Grade: " + gradingdata.Seatworkgrade);
                 Console.WriteLine("Quiz Grade: " + gradingdata.Quizgrade);
-                Console.WriteLine("Project Grade: " + gradingdata.Projectgrade);
                 Console.WriteLine("Recitation Grade: " + gradingdata.Recitgrade);
-                Console.WriteLine("Exam Grade: " + gradingdata.Examgrade);
                 Console.WriteLine("Attendance Grade: " + gradingdata.Attendancegrade);
+                Console.WriteLine("Exam Grade: " + gradingdata.Examgrade);
+                Console.WriteLine("Project Grade: " + gradingdata.Projectgrade);
                 Console.WriteLine("Midterm Grade: " + gradingdata.Midtermgrade);
                 Console.WriteLine("Final Grade: " + gradingdata.Finalgrade);
                 Console.WriteLine("Total Grade: " + gradingdata.Totalgrade);
